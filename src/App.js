@@ -5,14 +5,8 @@ import './index.css';
 const spotifyApi = new SpotifyWebApi();
 
 class App extends Component {
-<<<<<<< HEAD
-
-    constructor(){
-        super();
-=======
     constructor(props){
         super(props);
->>>>>>> f2fbecba40af385cbfe18d1970525af64bb13cd0
         const params = this.getHashParams();
         const token = params.access_token;
         if (token) {
@@ -61,21 +55,6 @@ class App extends Component {
     }
 
 
-<<<<<<< HEAD
-    render() {
-        return (
-            <div className="App">
-                <a href='http://localhost:8888'> Login to Spotify </a>
-                <div>
-                    Now Playing: { this.state.nowPlaying.name }
-                </div>
-                <div>
-                    <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
-                </div>
-            </div>
-        );
-    }
-=======
   render() {
         const { loggedIn } = this.state;
 
@@ -109,7 +88,6 @@ class App extends Component {
 
       }
   }
->>>>>>> f2fbecba40af385cbfe18d1970525af64bb13cd0
 }
 
 export default App;
