@@ -17,6 +17,7 @@ class App extends Component {
             nowPlaying: { name: 'Not Checked', albumArt: '' },
             currentPage: 'loginPage'
         }
+        this.getNowPlaying = this.getNowPlaying.bind(this);
     }
     getHashParams() {
         var hashParams = {};
@@ -38,6 +39,7 @@ class App extends Component {
             console.log('State set to homepage');
         };
     };
+
 
     getNowPlaying(){
         spotifyApi.getMyCurrentPlaybackState()
@@ -73,6 +75,13 @@ class App extends Component {
           return (
               <div className="App">
                   <p>HOMEPAGE</p>
+                  <button onClick={this.getNowPlaying}>Press here to see current track</button>
+                  <div>
+                      Now Playing: {this.state.nowPlaying.name}
+                  </div>
+                  <div>
+                      <img src={this.state.nowPlaying.albumArt} style={{height: 150}}/>
+                  </div>
               </div>
           );
 
