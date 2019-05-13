@@ -5,9 +5,14 @@ import './index.css';
 const spotifyApi = new SpotifyWebApi();
 
 class App extends Component {
+<<<<<<< HEAD
 
     constructor(){
         super();
+=======
+    constructor(props){
+        super(props);
+>>>>>>> f2fbecba40af385cbfe18d1970525af64bb13cd0
         const params = this.getHashParams();
         const token = params.access_token;
         if (token) {
@@ -15,8 +20,10 @@ class App extends Component {
         }
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: { name: 'Not Checked', albumArt: '' }
+            nowPlaying: { name: 'Not Checked', albumArt: '' },
+            currentPage: 'loginPage'
         }
+        this.getNowPlaying = this.getNowPlaying.bind(this);
     }
 
     getHashParams() {
@@ -31,6 +38,16 @@ class App extends Component {
         return hashParams;
     }
 
+    moveToHomePage = () => {
+        if (this.state.loggedIn === false) {
+            this.setState({
+                currentPage: 'homePage',
+            })
+            console.log('State set to homepage');
+        };
+    };
+
+
     getNowPlaying(){
         spotifyApi.getMyCurrentPlaybackState()
             .then((response) => {
@@ -44,6 +61,7 @@ class App extends Component {
     }
 
 
+<<<<<<< HEAD
     render() {
         return (
             <div className="App">
@@ -57,6 +75,41 @@ class App extends Component {
             </div>
         );
     }
+=======
+  render() {
+        const { loggedIn } = this.state;
+
+      if (loggedIn === false ) {
+          return (
+              <div className="App">
+                  <a href='http://localhost:8888'> Login to Spotify </a>
+                  <div>
+                      Now Playing: {this.state.nowPlaying.name}
+                  </div>
+                  <div>
+                      <img src={this.state.nowPlaying.albumArt} style={{height: 150}}/>
+                  </div>
+              </div>
+          );
+      }
+
+      if (loggedIn === true) {
+          return (
+              <div className="App">
+                  <p>HOMEPAGE</p>
+                  <button onClick={this.getNowPlaying}>Press here to see current track</button>
+                  <div>
+                      Now Playing: {this.state.nowPlaying.name}
+                  </div>
+                  <div>
+                      <img src={this.state.nowPlaying.albumArt} style={{height: 150}}/>
+                  </div>
+              </div>
+          );
+
+      }
+  }
+>>>>>>> f2fbecba40af385cbfe18d1970525af64bb13cd0
 }
 
 export default App;
