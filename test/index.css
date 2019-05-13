@@ -1,0 +1,30 @@
+:root {
+    /* Main Palette */
+    --musiq-white: #FFF;
+    --musiq-black: #191414;
+    --musiq-black-transparent: rgba(25,20,20,0.9);
+    --musiq-blue: #008395;
+    
+    /* Secondary palette */
+    --musiq-green: #1DB954;
+    --musiq-pink: #C800CC;
+    --musiq-fb: #3C5A99;
+
+    /* Fonts */
+    font-family: 'Open Sans', sans-serif;
+}
+
+.backgroundPicture {
+    background-color: var(--musiq-black);
+    background-image: url('img/studio.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.backgroundFilter {
+    background-color: var(--musiq-black-transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
