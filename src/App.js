@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
-import './App.css';
+import './index.css';
 
 const spotifyApi = new SpotifyWebApi();
 
 class App extends Component {
+
     constructor(){
         super();
         const params = this.getHashParams();
@@ -18,6 +18,7 @@ class App extends Component {
             nowPlaying: { name: 'Not Checked', albumArt: '' }
         }
     }
+
     getHashParams() {
         var hashParams = {};
         var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -43,19 +44,19 @@ class App extends Component {
     }
 
 
-  render() {
-    return (
-      <div className="App">
-          <a href='http://localhost:8888'> Login to Spotify </a>
-          <div>
-              Now Playing: { this.state.nowPlaying.name }
-          </div>
-          <div>
-              <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
-          </div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <a href='http://localhost:8888'> Login to Spotify </a>
+                <div>
+                    Now Playing: { this.state.nowPlaying.name }
+                </div>
+                <div>
+                    <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
