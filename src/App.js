@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
-import './App.css';
+import './index.css';
 
 const spotifyApi = new SpotifyWebApi();
 
 class App extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         const params = this.getHashParams();
         const token = params.access_token;
         if (token) {
@@ -15,7 +14,8 @@ class App extends Component {
         }
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: { name: 'Not Checked', albumArt: '' }
+            nowPlaying: { name: 'Not Checked', albumArt: '' },
+            currentPage: 'loginPage'
         }
     }
     getHashParams() {
@@ -29,6 +29,15 @@ class App extends Component {
         }
         return hashParams;
     }
+
+    moveToHomePage = () => {
+        if (this.state.loggedIn === false) {
+            this.setState({
+                currentPage: 'homePage',
+            })
+            console.log('State set to homepage');
+        };
+    };
 
     getNowPlaying(){
         spotifyApi.getMyCurrentPlaybackState()
@@ -44,17 +53,30 @@ class App extends Component {
 
 
   render() {
-    return (
-      <div className="App">
-          <a href='http://localhost:8888'> Login to Spotify </a>
-          <div>
-              Now Playing: { this.state.nowPlaying.name }
-          </div>
-          <div>
-              <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
-          </div>
-      </div>
-    );
+        const { loggedIn } = this.state;
+
+      if (loggedIn === false ) {
+          return (
+              <div className="App">
+                  <a href='http://localhost:8888'> Login to Spotify </a>
+                  <div>
+                      Now Playing: {this.state.nowPlaying.name}
+                  </div>
+                  <div>
+                      <img src={this.state.nowPlaying.albumArt} style={{height: 150}}/>
+                  </div>
+              </div>
+          );
+      }
+
+      if (loggedIn === true) {
+          return (
+              <div className="App">
+                  <p>HOMEPAGE</p>
+              </div>
+          );
+
+      }
   }
 }
 
