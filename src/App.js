@@ -96,27 +96,16 @@ class App extends Component {
 
       /* Login page */
       if (loggedIn === false ) {
-<<<<<<< HEAD
             return (
                 <div className="backgroundPicture">
-                    <a class="button" href="http://localhost:8888">Login to Spotify </a>
+                    <a class="button" href="http://localhost:8888/login">Login to Spotify </a>
                 </div>
             );
       }
-
+      
       /* Homepage */
-      if (loggedIn === true) {
-=======
-          return (
-              <div className="App">
-                  <a href='http://localhost:8888/login'> Login to Spotify </a>
-              </div>
-          );
-      }
-
       if (loggedIn === true && currentPage === 'homePage') {
 
->>>>>>> 5da4161c230b0e7a41f5270106a3ee9fd45f780d
           return (
               <div className="App">
                   <p>HOMEPAGE</p>
