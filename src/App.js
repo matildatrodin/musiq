@@ -88,9 +88,6 @@ class App extends Component {
     componentDidMount() {
         this.getPlaylist();
     }
-    
-
-
 
   render() {
         const { loggedIn } = this.state;
@@ -100,7 +97,7 @@ class App extends Component {
       if (loggedIn === false ) {
           return (
               <div className="App">
-                  <a href='http://localhost:8888'> Login to Spotify </a>
+                  <a href='http://localhost:8888/login'> Login to Spotify </a>
               </div>
           );
       }
