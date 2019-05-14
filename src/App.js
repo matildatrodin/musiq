@@ -88,22 +88,7 @@ class App extends Component {
     componentDidMount() {
         this.getPlaylist();
     }
-
-    /*
-
-    getPlaylist(){
-        spotifyApi.getUserPlaylists()
-            .then((response) => {
-                this.setState({
-                    playlist: {
-                        playlistId: response.items[0].id,
-                        image: response.items[0].images[0].url
-
-                    }
-                })
-        });
-    }
-    */
+    
 
 
 
