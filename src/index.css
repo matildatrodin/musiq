@@ -1,16 +1,36 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+	/* Main Palette */
+	--musiq-white: #FFF;
+	--musiq-black: #191414;
+	--musiq-black-transparent: rgba(25,20,20,0.9);
+	--musiq-blue: #008395;
+
+	/* Secondary palette */
+	--musiq-green: #1DB954;
+	--musiq-pink: #C800CC;
+	--musiq-fb: #3C5A99;
+
+	/* Fonts */
+	font-family: 'Open Sans', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+html, body, #root, .backgroundPicture {
+	height: 100%;
+}
+
+.backgroundPicture {
+	background-color: var(--musiq-black);
+	background-image: url('/public/img/studio.jpeg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.backgroundFilter {
+	background-color: var(--musiq-black-transparent);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .playlist-grid {
