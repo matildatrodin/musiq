@@ -62,9 +62,9 @@ class App extends Component {
                     nowPlaying: {
                         name: response.item.name,
                         albumArt: response.item.album.images[0].url
-                    }
-                });
-            })
+                }
+            });
+        })
     }
 
     getPlaylist () {
@@ -94,7 +94,19 @@ class App extends Component {
         const { currentPage } = this.state;
         const { playlist } = this.state;
 
+      /* Login page */
       if (loggedIn === false ) {
+<<<<<<< HEAD
+            return (
+                <div className="backgroundPicture">
+                    <a class="button" href="http://localhost:8888">Login to Spotify </a>
+                </div>
+            );
+      }
+
+      /* Homepage */
+      if (loggedIn === true) {
+=======
           return (
               <div className="App">
                   <a href='http://localhost:8888/login'> Login to Spotify </a>
@@ -104,6 +116,7 @@ class App extends Component {
 
       if (loggedIn === true && currentPage === 'homePage') {
 
+>>>>>>> 5da4161c230b0e7a41f5270106a3ee9fd45f780d
           return (
               <div className="App">
                   <p>HOMEPAGE</p>
