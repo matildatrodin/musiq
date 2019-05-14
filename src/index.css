@@ -32,3 +32,11 @@ html, body, #root, .backgroundPicture {
 	flex-direction: column;
 	justify-content: center;
 }
+
+.playlist-grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
+}
