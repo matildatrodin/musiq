@@ -49,29 +49,25 @@ class App extends Component {
                     nowPlaying: {
                         name: response.item.name,
                         albumArt: response.item.album.images[0].url
-                    }
-                });
-            })
+                }
+            });
+        })
     }
 
 
   render() {
         const { loggedIn } = this.state;
 
+      /* Login page */
       if (loggedIn === false ) {
-          return (
-              <div className="App">
-                  <a href='http://localhost:8888'> Login to Spotify </a>
-                  <div>
-                      Now Playing: {this.state.nowPlaying.name}
-                  </div>
-                  <div>
-                      <img src={this.state.nowPlaying.albumArt} style={{height: 150}}/>
-                  </div>
-              </div>
-          );
+            return (
+                <div className="backgroundPicture">
+                    <a class="button" href="http://localhost:8888">Login to Spotify </a>
+                </div>
+            );
       }
 
+      /* Homepage */
       if (loggedIn === true) {
           return (
               <div className="App">
