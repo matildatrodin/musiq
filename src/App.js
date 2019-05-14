@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
+import GridItem from './modules/gridItem';
 import './index.css';
 
 const spotifyApi = new SpotifyWebApi();
@@ -15,9 +16,14 @@ class App extends Component {
         this.state = {
             loggedIn: token ? true : false,
             nowPlaying: { name: 'Not Checked', albumArt: '' },
-            currentPage: 'loginPage'
+            playlist: [],
+            currentPage: 'homePage',
+            startCreateQuiz: false
         }
         this.getNowPlaying = this.getNowPlaying.bind(this);
+        this.getPlaylist = this.getPlaylist.bind(this);
+        this.moveToHomePage = this.moveToHomePage.bind(this);
+
     }
 
     getHashParams() {
@@ -41,6 +47,13 @@ class App extends Component {
         };
     };
 
+    moveToCreateQuiz = () => {
+        this.setState({
+            currentPage: 'createQuizPage',
+        })
+        console.log('State set to quizPage')
+    };
+
 
     getNowPlaying(){
         spotifyApi.getMyCurrentPlaybackState()
@@ -54,40 +67,86 @@ class App extends Component {
             })
     }
 
+    getPlaylist () {
+        spotifyApi.getUserPlaylists()
+            .then((response) => {
+                console.log(response);
+                var i;
+                for(i = 0; i < response.items.length; i++) {
+                    this.setState(previous => ({
+                        playlist: [...previous.playlist, {
+                            "image": response.items[i].images[0].url,
+                            "playlistId": response.items[i].id,
+                            "playlistName": response.items[i].name
+                        }]
+                    }))
+                }
+            });
+        return this.state.playlist;
+    }
+
+    componentDidMount() {
+        this.getPlaylist();
+    }
+
+    /*
+
+    getPlaylist(){
+        spotifyApi.getUserPlaylists()
+            .then((response) => {
+                this.setState({
+                    playlist: {
+                        playlistId: response.items[0].id,
+                        image: response.items[0].images[0].url
+
+                    }
+                })
+        });
+    }
+    */
+
+
 
   render() {
         const { loggedIn } = this.state;
+        const { currentPage } = this.state;
+        const { playlist } = this.state;
 
       if (loggedIn === false ) {
           return (
               <div className="App">
                   <a href='http://localhost:8888'> Login to Spotify </a>
-                  <div>
-                      Now Playing: {this.state.nowPlaying.name}
-                  </div>
-                  <div>
-                      <img src={this.state.nowPlaying.albumArt} style={{height: 150}}/>
-                  </div>
               </div>
           );
       }
 
-      if (loggedIn === true) {
+      if (loggedIn === true && currentPage === 'homePage') {
+
           return (
               <div className="App">
                   <p>HOMEPAGE</p>
-                  <button onClick={this.getNowPlaying}>Press here to see current track</button>
-                  <div>
-                      Now Playing: {this.state.nowPlaying.name}
-                  </div>
-                  <div>
-                      <img src={this.state.nowPlaying.albumArt} style={{height: 150}}/>
+                  <div className='playlist-grid'>
+                      {playlist.map(playlist =>(
+                      <GridItem
+                          createQuiz = {this.props.startCreateQuiz}
+                          moveToCreateQuiz = {this.moveToCreateQuiz}
+                          playlist = {playlist}/>
+                      ) )}
                   </div>
               </div>
           );
 
       }
+
+      if (loggedIn === true && currentPage === 'createQuizPage'){
+          return (
+              <div className="App">
+                  <p>Hejhej</p>
+              </div>
+          )
+      }
   }
+
 }
 
 export default App;
