@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import GridItem from './modules/gridItem';
+import QuizGenerator from './modules/quizGenerator';
 import './index.css';
 
 const spotifyApi = new SpotifyWebApi();
@@ -16,13 +17,20 @@ class App extends Component {
         this.state = {
             loggedIn: token ? true : false,
             nowPlaying: { name: 'Not Checked', albumArt: '' },
-            playlist: [],
+            playlistGrid: [],
+
+            chosenPlaylist: "",
+            playlistTracks: [],
+
             currentPage: 'homePage',
-            startCreateQuiz: false
+            startCreateQuiz: false,
+            startGame: false
         }
         this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
+        this.getTracks = this.getTracks.bind(this);
         this.moveToHomePage = this.moveToHomePage.bind(this);
+        this.moveToCreateQuiz = this.moveToCreateQuiz.bind(this);
 
     }
 
@@ -47,11 +55,24 @@ class App extends Component {
         };
     };
 
-    moveToCreateQuiz = () => {
+    moveToCreateQuiz = (playlist) => {
         this.setState({
             currentPage: 'createQuizPage',
+            chosenPlaylist: {
+                "playlistId": playlist.playlistId,
+                "image": playlist.image,
+                "playlistName": playlist.playlistName}
+
+        });
+        console.log('State set to createQuizPage');
+        console.log(playlist);
+    };
+
+    moveToGame = () => {
+        this.setState({
+            currentPage: 'gamePage',
         })
-        console.log('State set to quizPage')
+        console.log('State set to gamePage')
     };
 
 
@@ -70,19 +91,35 @@ class App extends Component {
     getPlaylist () {
         spotifyApi.getUserPlaylists()
             .then((response) => {
-                console.log(response);
                 var i;
                 for(i = 0; i < response.items.length; i++) {
                     this.setState(previous => ({
-                        playlist: [...previous.playlist, {
-                            "image": response.items[i].images[0].url,
+                        playlistGrid: [...previous.playlistGrid, {
                             "playlistId": response.items[i].id,
-                            "playlistName": response.items[i].name
+                            "image": response.items[i].images[0].url,
+                            "playlistName": response.items[i].name,
+                            "tracksId": response.items[i].tracks
                         }]
                     }))
                 }
             });
-        return this.state.playlist;
+        return this.state.playlistGrid;
+    }
+
+    getTracks () {
+        spotifyApi.getPlaylistTracks(this.state.chosenPlaylist.playlistId)
+            .then((response) => {
+                var i;
+                for(i =0; i < response.items.length; i++) {
+                    this.setState(previous => ({
+                        playlistTracks: [...previous.playlistTracks, {
+                            "track" : response.items[i]
+                        }
+                    ]}))
+                }
+        });
+        return this.state.playlistTracks;
+
     }
 
     componentDidMount() {
@@ -92,17 +129,19 @@ class App extends Component {
   render() {
         const { loggedIn } = this.state;
         const { currentPage } = this.state;
-        const { playlist } = this.state;
+        const { playlistGrid } = this.state;
+
+        //console.log(this.state);
 
       /* Login page */
       if (loggedIn === false ) {
             return (
                 <div className="backgroundPicture">
-                    <a class="button" href="http://localhost:8888/login">Login to Spotify </a>
+                    <a className="button" href="http://localhost:8888/login">Login to Spotify </a>
                 </div>
             );
       }
-      
+
       /* Homepage */
       if (loggedIn === true && currentPage === 'homePage') {
 
@@ -110,11 +149,13 @@ class App extends Component {
               <div className="App">
                   <p>HOMEPAGE</p>
                   <div className='playlist-grid'>
-                      {playlist.map(playlist =>(
+                      {playlistGrid.map(playlist =>(
                       <GridItem
-                          createQuiz = {this.props.startCreateQuiz}
+                          key={playlistGrid.playlistId}
+                          startCreateQuiz = {this.state.startCreateQuiz}
                           moveToCreateQuiz = {this.moveToCreateQuiz}
-                          playlist = {playlist}/>
+                          playlist = {playlist}
+                          chosenPlaylist = {this.state.chosenPlaylist}/>
                       ) )}
                   </div>
               </div>
@@ -125,7 +166,13 @@ class App extends Component {
       if (loggedIn === true && currentPage === 'createQuizPage'){
           return (
               <div className="App">
-                  <p>Hejhej</p>
+                  <img src={this.state.chosenPlaylist.image}/>
+                  <p>{this.state.chosenPlaylist.playlistName}</p>
+                  <QuizGenerator
+                    startGame = {this.props.startGame}
+                    moveToGame = {this.moveToGame}
+                    playlistTracks = {this.props.playlistTracks}
+                    getTracks = {this.getTracks}/>
               </div>
           )
       }
