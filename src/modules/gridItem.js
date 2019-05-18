@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
-import SpotifyWebApi from 'spotify-web-api-js';
 
 class GridItem extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            playlist: this.props.playlist,
+            image: this.props.playlist.image,
+            startCreateQuiz: this.props.startCreateQuiz
+        };
+    }
+
     handleClick = () => {
-        if (this.props.startCreateQuiz === false) {
+
+
+        if (this.state.startCreateQuiz === false) {
             this.setState({
                 clicked: true,
             });
+            this.props.moveToCreateQuiz(this.props.playlist);
         }
-        this.props.moveToCreateQuiz();
     };
 
+
+
     render() {
-        const image = this.props.playlist.image;
-        console.log(this.props.playlist);
 
         return (
             <div>
-                <img src={image} className='Grid-img' onClick={this.handleClick} style={{height: 150}} />
-                <p>{this.props.playlist.playlistName}</p>
+                <img src={this.state.image} className='Grid-img' style={{height: 150}} onClick={this.handleClick}/>
+                <p>{this.state.playlist.playlistName}</p>
             </div>
 
         );
