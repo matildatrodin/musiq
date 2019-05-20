@@ -18,14 +18,7 @@ class QuizGenerator extends Component {
         this.generateQuiz = this.generateQuiz.bind(this);
         this.getTracks = this.getTracks.bind(this);
     }
-    handleClick = () => {
-        if (this.props.startGame === false) {
-            this.setState({
-                clicked: true,
-            });
-        }
-        this.props.moveToGame();
-    };
+    handleClick = () => { this.props.moveToGame(); };
 
     getTracks () {
         spotifyApi.getPlaylistTracks(this.props.chosenPlaylist.playlistId)
@@ -48,19 +41,15 @@ class QuizGenerator extends Component {
                     "trackName": this.state.playlistTracks[i].track.name,
                     "songId": this.state.playlistTracks[i].track.id
             });
-            console.log(questions);
         }
         return questions;
     };
 
 
     render() {
-        console.log(this.state);
 
         return (
             <div>
-                <button onClick={this.getTracks}>Get Tracks</button>
-                <button onClick={this.generateQuiz}>Generate quiz</button>
                 <button onClick={this.handleClick}>Start Quiz</button>
             </div>
 
