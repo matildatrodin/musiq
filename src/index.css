@@ -1,14 +1,88 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+	/* Main Palette */
+	--musiq-white: #FFF;
+	--musiq-black: #191414;
+	--musiq-black-transparent: rgba(25,20,20,0.9);
+	--musiq-blue: #008395;
+
+	/* Secondary palette */
+	--musiq-green: #1DB954;
+	--musiq-pink: #C800CC;
+	--musiq-fb: #3C5A99;
+
+	/* Fonts */
+	font-family: 'Open Sans', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@font-face {
+	font-family: 'NATS';
+	src: url("resources/fonts/NATS-Regular.ttf");
+  }
+
+html, body, #root, .backgroundPicture, .backgroundFilter {
+	height: 100%;
+}
+
+.backgroundPicture {
+	background-color: var(--musiq-black);
+	background-image: url('resources/img/studio.jpeg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.backgroundFilter {
+	background-color: var(--musiq-black-transparent);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.logo {
+	font-family: 'NATS';
+	font-size: 7rem;
+	font-style: normal;
+	font-weight: normal;
+	color: var(--musiq-white);
+	margin-bottom: 100px;
+}
+
+.logo #q {
+	color: var(--musiq-blue);
+}
+
+.button {
+	border-radius: 50px;
+	background-color: var(--musiq-green);
+	color: var(--musiq-white);
+	border: none;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	text-transform: none;
+	font-size: 1.5rem;
+	font-weight: normal;
+	transition: 0.25s;
+	display: flex;
+	align-items: center;
+}
+
+.button img {
+	margin-left: 5px;
+	height: 25px;
+	width: auto;
+}
+
+.button:hover {
+	background-color: var(--musiq-green);
+	color: var(--musiq-white);
+	filter: saturate(125%);
+}
+
+
+.playlist-grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
 }
