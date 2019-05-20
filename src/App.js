@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import SpotifyWebApi from 'spotify-web-api-js';
-import './App.css';
+import loginButton from './buttons';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -53,6 +52,7 @@ class App extends Component {
           <div>
               <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
           </div>
+          <loginButton/>
       </div>
     );
   }
