@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import GridItem from './modules/gridItem';
 import QuizGenerator from './modules/quizGenerator';
+import Game from './modules/game';
 import './index.css';
 
 const spotifyApi = new SpotifyWebApi();
@@ -23,9 +24,8 @@ class App extends Component {
             playlistTracks: [],
 
             currentPage: 'homePage',
-            startCreateQuiz: false,
             startGame: false
-        }
+        };
         this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
         this.getTracks = this.getTracks.bind(this);
@@ -57,15 +57,18 @@ class App extends Component {
 
     moveToCreateQuiz = (playlist) => {
         this.setState({
-            currentPage: 'createQuizPage',
             chosenPlaylist: {
                 "playlistId": playlist.playlistId,
                 "image": playlist.image,
-                "playlistName": playlist.playlistName}
+                "playlistName": playlist.playlistName},
+
+            currentPage: 'createQuizPage'
 
         });
+
         console.log('State set to createQuizPage');
         console.log(playlist);
+        console.log(this.state.chosenPlaylist);
     };
 
     moveToGame = () => {
@@ -118,7 +121,7 @@ class App extends Component {
                     ]}))
                 }
         });
-        return this.state.playlistTracks;
+        console.log(this.state.playlistTracks);
 
     }
 
@@ -131,7 +134,7 @@ class App extends Component {
         const { currentPage } = this.state;
         const { playlistGrid } = this.state;
 
-        //console.log(this.state);
+        console.log(this.state);
 
       /* Login page */
       if (loggedIn === false ) {
@@ -152,7 +155,6 @@ class App extends Component {
                       {playlistGrid.map(playlist =>(
                       <GridItem
                           key={playlistGrid.playlistId}
-                          startCreateQuiz = {this.state.startCreateQuiz}
                           moveToCreateQuiz = {this.moveToCreateQuiz}
                           playlist = {playlist}
                           chosenPlaylist = {this.state.chosenPlaylist}/>
@@ -163,6 +165,7 @@ class App extends Component {
 
       }
 
+      /* Create a quiz page */
       if (loggedIn === true && currentPage === 'createQuizPage'){
           return (
               <div className="App">
@@ -171,8 +174,18 @@ class App extends Component {
                   <QuizGenerator
                     startGame = {this.props.startGame}
                     moveToGame = {this.moveToGame}
-                    playlistTracks = {this.props.playlistTracks}
-                    getTracks = {this.getTracks}/>
+                    chosenPlaylist = {this.state.chosenPlaylist}
+                  />
+              </div>
+          )
+      }
+
+      /* Game Page */
+
+      if (loggedIn === true && currentPage === 'gamePage'){
+          return (
+              <div className="App">
+              <Game/>
               </div>
           )
       }
