@@ -1,3 +1,5 @@
+To run the server go to directory server->auth-server->authorization_code and run "node app.js"
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
