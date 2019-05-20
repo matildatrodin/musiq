@@ -24,7 +24,6 @@ class App extends Component {
             playlistTracks: [],
 
             currentPage: 'homePage',
-            startGame: false
         };
         this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
@@ -109,22 +108,6 @@ class App extends Component {
         return this.state.playlistGrid;
     }
 
-    getTracks () {
-        spotifyApi.getPlaylistTracks(this.state.chosenPlaylist.playlistId)
-            .then((response) => {
-                var i;
-                for(i =0; i < response.items.length; i++) {
-                    this.setState(previous => ({
-                        playlistTracks: [...previous.playlistTracks, {
-                            "track" : response.items[i]
-                        }
-                    ]}))
-                }
-        });
-        console.log(this.state.playlistTracks);
-
-    }
-
     componentDidMount() {
         this.getPlaylist();
     }
@@ -134,7 +117,7 @@ class App extends Component {
         const { currentPage } = this.state;
         const { playlistGrid } = this.state;
 
-        console.log(this.state);
+        //console.log(this.state);
 
       /* Login page */
       if (loggedIn === false ) {
@@ -172,7 +155,6 @@ class App extends Component {
                   <img src={this.state.chosenPlaylist.image}/>
                   <p>{this.state.chosenPlaylist.playlistName}</p>
                   <QuizGenerator
-                    startGame = {this.props.startGame}
                     moveToGame = {this.moveToGame}
                     chosenPlaylist = {this.state.chosenPlaylist}
                   />
