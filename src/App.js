@@ -3,6 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import GridItem from './modules/gridItem';
 import QuizGenerator from './modules/quizGenerator';
 import './index.css';
+import spotify_white from './resources/icons/spotify_white.svg';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -137,7 +138,10 @@ class App extends Component {
       if (loggedIn === false ) {
             return (
                 <div className="backgroundPicture">
-                    <a className="button" href="http://localhost:8888/login">Login to Spotify </a>
+                    <div className="backgroundFilter">
+                        <h1 class="logo">musi<span id="q">Q</span></h1>
+                        <a class="button" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
+                    </div>
                 </div>
             );
       }
