@@ -1,0 +1,280 @@
+html,body {
+    font-family: Open Sans; 
+}
+
+/*
+ * Question page
+ */
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -100;
+}
+
+.navbar {
+    background-color: black;
+    color: white;
+    margin: 0;
+    height: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 35px 0;
+}
+
+.navbar li {
+    display: inline-block;
+    font-size: 25px;
+    padding-left: 2%;
+    padding-right: 15%;
+    margin-right: 20%;
+    background-color: black;
+    color: white;
+}
+  
+.questionBox {
+    position: absolute;
+    width: 650px;
+    height: 150px;
+    top: 30%;
+    left: 50%;
+    margin: -100px 0 0 -300px;
+    background: transparent;
+}
+
+.question {
+    color: white;
+    position: absolute;
+    width: 60%;
+    font-size: 10mm;
+    top: 10px;
+    right: 10px;
+}
+
+.albumQuestion {
+    margin-left: 40px; 
+    max-width:100%;
+    max-height:100%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.answerBox {
+    position: absolute;
+    width: 650px;
+    height: 300px;
+    top: 55%;
+    left: 50%;
+    margin: -100px 0 0 -300px;
+    background: transparent;
+}
+
+button.answers{
+    border: none;
+    position: absolute;
+    background-color:grey;
+    color: white;
+    width: 40%;
+    border-radius: 30px;
+    padding: 18px 20px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 12pt;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#answer1 {
+    top: 50px;
+    left: 30px; 
+}
+
+#answer2 {
+    top: 50px;
+    right: 30px; 
+}
+
+#answer3 {
+    bottom: 50px;
+    left: 30px; 
+}
+
+#answer4 {
+    bottom: 50px;
+    right: 30px; 
+}
+
+.arrowBox {
+    position: absolute;
+    width: 650px;
+    height: 100px;
+    top: 97%;
+    left: 50%;
+    margin: -100px 0 0 -300px;
+    background: transparent;
+}
+
+button.right {
+    position: absolute;
+    left: 260px;
+    bottom: 20px;
+    width: 12%;
+    padding-bottom: 12%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: gray;
+    position: relative;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+button.right:before {
+    content: '';
+    display: block;
+    border-top: solid 15px transparent;
+    border-left: solid 20px black;
+    border-bottom: solid 15px transparent;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+}
+
+button.left {
+    position: absolute;
+    left: 230px;
+    bottom: 20px;
+    width: 12%;
+    padding-bottom: 12%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: grey;
+    position: relative;
+    border: none;
+  }
+
+button.left:before {
+    content: '';
+    display: block;
+    border-top: solid 15px transparent;
+    border-right: solid 20px black;
+    border-bottom: solid 15px transparent;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+}
+
+/*
+ * Main page
+ */
+.startButton {
+    border: none;
+    background-color: rgba(0, 131, 149, 1);
+    color: white;
+    width: 20%;
+    border-radius: 30px;
+    padding: 16px 15px;
+    font-size: 22pt;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.start {
+    text-align: center;
+    margin-top: 150px;
+}
+
+.quizBox {
+    position: absolute;
+    width: 100%;
+    height: 61%;
+    top: 55%;
+    left: 50%;
+    margin: -100px 0 0 -720px;
+    background: black;
+}
+
+.saved {
+    position: absolute;
+    left: 90px;
+    top: 20px;
+    width: 40%;
+    height: 85%;
+    background-color: transparent;
+}
+
+.album {
+    width: 25%;
+    height: auto;
+}
+
+.savedHead {
+    color: antiquewhite;
+    font-size: 22px;
+    margin-left: 150px;
+}
+
+#saved1 {
+    position: absolute;
+    top: 50px;
+    left: 150px;
+}
+
+#saved2 {
+    position: absolute;
+    top: 50px;
+    right: 40px;
+}
+
+#saved3 {
+    position: absolute;
+    bottom: 10px;
+    left: 150px;
+}
+
+#saved4 {
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
+}
+
+.playlist {
+    position: absolute;
+    right: 90px;
+    top: 20px;
+    width: 40%;
+    height: 85%;
+    background-color: transparent
+}
+
+.playlistHead {
+    color: antiquewhite;
+    font-size: 22px;
+    margin-left: 30px;
+}
+
+#playlist1 {
+    position: absolute;
+    top: 50px;
+    left: 30px;
+}
+
+#playlist2 {
+    position: absolute;
+    top: 50px;
+    right: 160px;
+}
+
+#playlist3 {
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+}
+
+#playlist4 {
+    position: absolute;
+    bottom: 10px;
+    right: 160px;
+}
