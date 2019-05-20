@@ -28,7 +28,6 @@ class App extends Component {
         };
         this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
-        this.getTracks = this.getTracks.bind(this);
         this.moveToHomePage = this.moveToHomePage.bind(this);
         this.moveToCreateQuiz = this.moveToCreateQuiz.bind(this);
 
