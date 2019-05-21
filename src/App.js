@@ -24,7 +24,7 @@ class App extends Component {
             chosenPlaylist: "",
             playlistTracks: [],
 
-            questions: "",
+            questionData: "",
 
             currentPage: 'homePage',
         };
@@ -72,9 +72,9 @@ class App extends Component {
         console.log(this.state.chosenPlaylist);
     };
 
-    moveToGame = (questions) => {
+    moveToGame = (questionData) => {
         this.setState({
-            questions: questions,
+            questionData: questionData,
             currentPage: 'gamePage',
         })
         console.log('State set to gamePage')
@@ -163,7 +163,7 @@ class App extends Component {
                   <QuizGenerator
                     moveToGame = {this.moveToGame}
                     chosenPlaylist = {this.state.chosenPlaylist}
-                    questions = {this.state.questions}
+                    questionData = {this.state.questionData}
                   />
               </div>
           )
@@ -175,7 +175,7 @@ class App extends Component {
           return (
               <div className="App">
               <Game
-                  questions = {this.state.questions}
+                  questionData = {this.state.questionData}
               />
               </div>
           )

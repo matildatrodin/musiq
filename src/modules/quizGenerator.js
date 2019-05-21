@@ -12,12 +12,12 @@ class QuizGenerator extends Component {
         this.state = {
             playlistTracks: [],
             relatedArtists: "",
-            questions: "",
+            questionData: "",
             amountOfQuestions: 0,
             quizReady: false
         };
 
-        this.generateQuiz = this.generateQuiz.bind(this);
+        this.generateQuizData = this.generateQuizData.bind(this);
         this.getTracks = this.getTracks.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +27,7 @@ class QuizGenerator extends Component {
 
     }
 
-    handleClick = () => { this.props.moveToGame(this.state.questions); };
+    handleClick = () => { this.props.moveToGame(this.state.questionData); };
 
     handleChange(event){
         this.setState({amountOfQuestions: event.target.value});
@@ -35,7 +35,7 @@ class QuizGenerator extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        this.generateQuiz();
+        this.generateQuizData();
     }
 
 
@@ -69,22 +69,21 @@ class QuizGenerator extends Component {
 
 
 
-    generateQuiz = () => {
-        let questions = [];
+    generateQuizData = () => {
+        let questionData = [];
         var i;
         for (i = 0; i < this.state.playlistTracks.length && i < this.state.amountOfQuestions; i++){
 
-            questions.push({
+            questionData.push({
                     "artist": this.state.playlistTracks[i].track.artists[0].name,
                     "trackName": this.state.playlistTracks[i].track.name,
                     "songId": this.state.playlistTracks[i].track.id,
                     "artistId": this.state.playlistTracks[i].track.artists[0].id,
                     "relatedArtists": this.getRelatedArtist(this.state.playlistTracks[i].track.artists[0].id)
             });
-            console.log(questions);
         }
         this.setState({
-            questions: questions,
+            questionData: questionData,
             quizReady: true
         });
 
