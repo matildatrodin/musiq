@@ -1,4 +1,4 @@
-import react, {Component} from 'react';
+import React, {Component} from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import '../index.css';
 
@@ -11,18 +11,19 @@ class Game extends Component {
 
         this.state = {
             questions: this.props.questions,
-            answers: [],
-            tracks: []
-        }
+        };
     }
 
-    getRandomArtist(){
-    }
 
 
 
     render(){
-        return("");
+
+        console.log(this.state);
+
+        return(
+            <button>Start Game</button>
+        );
     }
 }
 
