@@ -5,6 +5,7 @@ html,body {
 /*
  * Question page
  */
+
 #background {
     position: fixed;
     top: 0;
@@ -170,6 +171,12 @@ button.left:before {
 /*
  * Main page
  */
+ .navBar {
+    width: 300;
+    height: 200;
+    background-color: blue;
+}
+
 .startButton {
     border: none;
     background-color: rgba(0, 131, 149, 1);
