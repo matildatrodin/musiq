@@ -24,6 +24,8 @@ class App extends Component {
             chosenPlaylist: "",
             playlistTracks: [],
 
+            questions: "",
+
             currentPage: 'homePage',
         };
         this.getNowPlaying = this.getNowPlaying.bind(this);
@@ -70,8 +72,9 @@ class App extends Component {
         console.log(this.state.chosenPlaylist);
     };
 
-    moveToGame = () => {
+    moveToGame = (questions) => {
         this.setState({
+            questions: questions,
             currentPage: 'gamePage',
         })
         console.log('State set to gamePage')
@@ -117,7 +120,7 @@ class App extends Component {
         const { currentPage } = this.state;
         const { playlistGrid } = this.state;
 
-        //console.log(this.state);
+        console.log(this.state);
 
       /* Login page */
       if (loggedIn === false ) {
@@ -160,6 +163,7 @@ class App extends Component {
                   <QuizGenerator
                     moveToGame = {this.moveToGame}
                     chosenPlaylist = {this.state.chosenPlaylist}
+                    questions = {this.state.questions}
                   />
               </div>
           )
@@ -170,7 +174,9 @@ class App extends Component {
       if (loggedIn === true && currentPage === 'gamePage'){
           return (
               <div className="App">
-              <Game/>
+              <Game
+                  questions = {this.state.questions}
+              />
               </div>
           )
       }
