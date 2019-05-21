@@ -11,6 +11,7 @@ class QuizGenerator extends Component {
 
         this.state = {
             playlistTracks: [],
+            relatedArtists: "",
             questions: "",
             amountOfQuestions: 0,
             quizReady: false
@@ -20,6 +21,10 @@ class QuizGenerator extends Component {
         this.getTracks = this.getTracks.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.getRelatedArtist = this.getRelatedArtist.bind(this);
+
+
+
     }
 
     handleClick = () => { this.props.moveToGame(this.state.questions); };
@@ -45,16 +50,36 @@ class QuizGenerator extends Component {
                 }
             });
     }
+    getRelatedArtist(artistId){
+        let relatedArtists = [];
+
+        spotifyApi.getArtistRelatedArtists(artistId)
+            .then((response) =>{
+                var i;
+                for (i = 0; i < response.artists.length; i++){
+                    relatedArtists.push({
+                        "name" : response.artists[i].name
+                    })
+                }
+            });
+        return (relatedArtists);
+        }
+
+
+
 
 
     generateQuiz = () => {
         let questions = [];
         var i;
         for (i = 0; i < this.state.playlistTracks.length && i < this.state.amountOfQuestions; i++){
+
             questions.push({
                     "artist": this.state.playlistTracks[i].track.artists[0].name,
                     "trackName": this.state.playlistTracks[i].track.name,
-                    "songId": this.state.playlistTracks[i].track.id
+                    "songId": this.state.playlistTracks[i].track.id,
+                    "artistId": this.state.playlistTracks[i].track.artists[0].id,
+                    "relatedArtists": this.getRelatedArtist(this.state.playlistTracks[i].track.artists[0].id)
             });
             console.log(questions);
         }
