@@ -12,13 +12,27 @@ class QuizGenerator extends Component {
         this.state = {
             playlistTracks: [],
             questions: "",
-            answers: []
+            amountOfQuestions: 0,
+            quizReady: false
         };
 
         this.generateQuiz = this.generateQuiz.bind(this);
         this.getTracks = this.getTracks.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
-    handleClick = () => { this.props.moveToGame(); };
+
+    handleClick = () => { this.props.moveToGame(this.state.questions); };
+
+    handleChange(event){
+        this.setState({amountOfQuestions: event.target.value});
+    }
+
+    handleSubmit(event){
+        event.preventDefault();
+        this.generateQuiz();
+    }
+
 
     getTracks () {
         spotifyApi.getPlaylistTracks(this.props.chosenPlaylist.playlistId)
@@ -32,28 +46,61 @@ class QuizGenerator extends Component {
             });
     }
 
+
     generateQuiz = () => {
         let questions = [];
         var i;
-        for (i = 0; i < this.state.playlistTracks.length; i++){
+        for (i = 0; i < this.state.playlistTracks.length && i < this.state.amountOfQuestions; i++){
             questions.push({
                     "artist": this.state.playlistTracks[i].track.artists[0].name,
                     "trackName": this.state.playlistTracks[i].track.name,
                     "songId": this.state.playlistTracks[i].track.id
             });
+            console.log(questions);
         }
-        return questions;
+        this.setState({
+            questions: questions,
+            quizReady: true
+        });
+
+    };
+
+    componentDidMount() {
+        this.getTracks();
     };
 
 
     render() {
 
-        return (
-            <div>
-                <button onClick={this.handleClick}>Start Quiz</button>
-            </div>
+        console.log(this.state);
 
-        );
+        if(this.state.quizReady == false) {
+
+            return (
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Amount of questions:
+                            <input type="text" name="amountOfQuestions" value={this.state.amountOfQuestions}
+                                   onChange={this.handleChange}/>
+                        </label>
+                        <input type="submit" value="Submit"/>
+                    </form>
+                </div>
+
+            );
+        }
+
+        if(this.state.quizReady == true) {
+
+            return (
+                <div>
+                    <p>Your quiz is ready</p>
+                    <button onClick={this.handleClick}>Start Quiz</button>
+                </div>
+
+            );
+        }
     }
 }
 
