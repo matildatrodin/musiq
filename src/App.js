@@ -3,8 +3,10 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import GridItem from './modules/gridItem';
 import QuizGenerator from './modules/quizGenerator';
 import Game from './modules/game';
+
 import './index.css';
 import spotify_white from './resources/icons/spotify_white.svg';
+import background_animation from './resources/animations/background.js'
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -128,7 +130,7 @@ class App extends Component {
                 <div className="backgroundPicture">
                     <div className="backgroundFilter">
                         <h1 class="logo">musi<span id="q">Q</span></h1>
-                        <a class="button" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
+                        <a class="spotifyButton" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
                     </div>
                 </div>
             );
@@ -137,20 +139,62 @@ class App extends Component {
       /* Homepage */
       if (loggedIn === true && currentPage === 'homePage') {
 
-          return (
-              <div className="App">
-                  <p>HOMEPAGE</p>
-                  <div className='playlist-grid'>
-                      {playlistGrid.map(playlist =>(
-                      <GridItem
-                          key={playlistGrid.playlistId}
-                          moveToCreateQuiz = {this.moveToCreateQuiz}
-                          playlist = {playlist}
-                          chosenPlaylist = {this.state.chosenPlaylist}/>
-                      ) )}
-                  </div>
-              </div>
-          );
+        return (
+            <div className="App">
+
+                <div className="banner">
+
+                    <canvas src={background_animation} id="background"></canvas>
+
+                    <div className="header">
+                        <h1 class="logo">musi<span id="q">Q</span></h1>
+
+                        <div class="user">
+                            <img className="profilePic"/>
+                            <div className="username">username</div>
+                        </div>
+                    </div>
+
+                    <div className="createQuiz">
+                        <a class="buttonCreate" href="http://localhost:8888/login">Create Quiz</a>
+                    </div>
+
+                </div>
+
+                <div className="box">
+
+                    <div className="saved">
+                        <h2>Saved Quizes</h2>
+                        {/*
+                        <div className='quiz-grid'>
+                            {quizGrid.map(quiz =>(
+                            <GridItem
+                                key={quizGrid.quizId}
+                                moveToCreateQuiz = {this.moveToCreateQuiz}
+                                quiz = {quiz}
+                                chosenQuiz = {this.state.chosenQuiz}/>
+                            ) )}
+                        </div>
+                        */}
+                    </div>
+
+                    <div className="saved">
+                        <h2>Saved Playlists</h2>
+                        <div className='playlist-grid'>
+                            {playlistGrid.map(playlist =>(
+                            <GridItem
+                                key={playlistGrid.playlistId}
+                                moveToCreateQuiz = {this.moveToCreateQuiz}
+                                playlist = {playlist}
+                                chosenPlaylist = {this.state.chosenPlaylist}/>
+                            ) )}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        );
 
       }
 
