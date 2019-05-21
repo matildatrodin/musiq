@@ -20,7 +20,7 @@ class GridItem extends Component {
     render() {
 
         return (
-            <div>
+            <div className="single">
                 <img src={this.state.image} className='Grid-img' style={{height: 150}} onClick={this.handleClick}/>
                 <p>{this.state.playlist.playlistName}</p>
             </div>
