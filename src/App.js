@@ -164,7 +164,7 @@ class App extends Component {
                 <div className="box">
 
                     <div className="saved">
-                        <h2>Saved Quizes</h2>
+                        <h2>Saved Quizzes</h2>
                         {/*
                         <div className='quiz-grid'>
                             {quizGrid.map(quiz =>(
