@@ -2,46 +2,46 @@
  * @author  pbondoer - http://bondoer.fr/
  * @license CC0 - https://creativecommons.org/publicdomain/zero/1.0/
  */
-/*
+
 window.onload = () => {
 	
 	var ctx = document.getElementById('background').getContext('2d');
 	//gradient
 	var options =
 	{
-		resolution: 1,
+		resolution: 4,
 		gradient:
 		{
-			resolution: 4,
+			resolution: 6,
 			smallRadius: 0,
 			hue:
 			{
-				min: 0,
-				max: 360
+				min: 221,
+				max: 299
 			},
 			saturation:
 			{
-				min: 40,
-				max: 80
+				min: 44,
+				max: 100
 			},
 			lightness:
 			{
-				min: 25,
-				max: 35
+				min: 40,
+				max: 42
 			}
 		},
 		bokeh:
 		{
-			count: 30,
+			count: 6,
 			size:
 			{
-				min: 0.1,
-				max: 0.3
+				min: 0.5,
+				max: 0.5
 			},
 			alpha:
 			{
 				min: 0.05,
-				max: 0.4
+				max: 0.1
 			},
 			jitter:
 			{
@@ -51,7 +51,7 @@ window.onload = () => {
 		},
 		speed:
 		{
-			min: 0.0001,
+			min: 0.001,
 			max: 0.001
 		},
 		debug:
@@ -371,4 +371,4 @@ window.onload = () => {
 	init();
 	render();
 }
-*/
+ 
