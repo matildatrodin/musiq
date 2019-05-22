@@ -128,6 +128,7 @@ class App extends Component {
       if (loggedIn === false ) {
             return (
                 <div className="backgroundPicture">
+                    <canvas src={background_animation} id="background"></canvas>
                     <div className="backgroundFilter">
                         <h1 class="logo">musi<span id="q">Q</span></h1>
                         <a class="spotifyButton" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
