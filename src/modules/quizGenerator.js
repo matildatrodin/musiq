@@ -98,7 +98,7 @@ class QuizGenerator extends Component {
 
         console.log(this.state);
 
-        if(this.state.quizReady == false) {
+        if(this.state.quizReady === false) {
 
             return (
                 <div>
@@ -115,7 +115,7 @@ class QuizGenerator extends Component {
             );
         }
 
-        if(this.state.quizReady == true) {
+        if(this.state.quizReady === true) {
 
             return (
                 <div>
