@@ -3,6 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import GridItem from './modules/gridItem';
 import QuizGenerator from './modules/quizGenerator';
 import Game from './modules/game';
+import Language from './modules/language';
 import Script from 'react-load-script';
 
 import './index.css';
@@ -221,9 +222,18 @@ class App extends Component {
       if (loggedIn === false ) {
             return (
                 <div className="backgroundPicture">
+
+                    <canvas src={background_animation} id="background"></canvas>
+
                     <div className="backgroundFilter">
+
+                        <div className="float_language">
+                            <Language/>
+                        </div>
+
                         <h1 class="logo">musi<span id="q">Q</span></h1>
                         <a class="spotifyButton" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
+
                     </div>
                 </div>
             );
@@ -242,7 +252,9 @@ class App extends Component {
                 />
                 <div className="banner">
 
-                    <canvas src={background_animation} id="background"></canvas>
+                    <canvas src={background_animation} id="background">
+                        <h1>hello</h1>
+                    </canvas>
 
                     <div className="header">
                         <h1 class="logo">musi<span id="q">Q</span></h1>
@@ -250,6 +262,7 @@ class App extends Component {
                         <div class="user">
                             <img className="profilePic"/>
                             <div className="username">username</div>
+                            <Language/>
                         </div>
                     </div>
 
@@ -262,7 +275,7 @@ class App extends Component {
                 <div className="box">
 
                     <div className="saved">
-                        <h2>Saved Quizes</h2>
+                        <h2>Saved Quizzes</h2>
                         {/*
                         <div className='quiz-grid'>
                             {quizGrid.map(quiz =>(
