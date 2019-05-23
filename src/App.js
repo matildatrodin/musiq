@@ -9,6 +9,12 @@ import './index.css';
 import spotify_white from './resources/icons/spotify_white.svg';
 import background_animation from './resources/animations/background.js'
 
+
+/*
+TO DO
+Add username and user picture
+*/
+
 const spotifyApi = new SpotifyWebApi();
 
 class App extends Component {
@@ -20,6 +26,7 @@ class App extends Component {
             spotifyApi.setAccessToken(token);
         }
         this.state = {
+            language: "english",
             loggedIn: token ? true : false,
             nowPlaying: { name: 'Not Checked', albumArt: '' },
             playlistGrid: [],
@@ -135,7 +142,9 @@ class App extends Component {
                     <div className="backgroundFilter">
 
                         <div className="float_language">
-                            <Language/>
+                            <Language
+                                language = {this.state.language}
+                            />
                         </div>
 
                         <h1 class="logo">musi<span id="q">Q</span></h1>
@@ -150,13 +159,11 @@ class App extends Component {
       if (loggedIn === true && currentPage === 'homePage') {
 
         return (
-            <div className="App">
+            <div className="main">
 
                 <div className="banner">
 
-                    <canvas src={background_animation} id="background">
-                        <h1>hello</h1>
-                    </canvas>
+                    <canvas src={background_animation} id="background"></canvas>
 
                     <div className="header">
                         <h1 class="logo">musi<span id="q">Q</span></h1>
@@ -214,7 +221,8 @@ class App extends Component {
       /* Create a quiz page */
       if (loggedIn === true && currentPage === 'createQuizPage'){
           return (
-              <div className="App">
+              <div className="create">
+                  <canvas src={background_animation} id="background"></canvas>
                   <img src={this.state.chosenPlaylist.image}/>
                   <p>{this.state.chosenPlaylist.playlistName}</p>
                   <QuizGenerator
