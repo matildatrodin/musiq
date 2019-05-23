@@ -1,59 +1,55 @@
-/* 
- * @author  pbondoer - http://bondoer.fr/
- * @license CC0 - https://creativecommons.org/publicdomain/zero/1.0/
- */
-/*
 window.onload = () => {
 	
 	var ctx = document.getElementById('background').getContext('2d');
+
 	//gradient
-	var options =
-	{
-		resolution: 1,
-		gradient:
-		{
-			resolution: 4,
-			smallRadius: 0,
-			hue:
-			{
-				min: 0,
-				max: 360
-			},
-			saturation:
-			{
-				min: 40,
-				max: 80
-			},
-			lightness:
-			{
-				min: 25,
-				max: 35
-			}
-		},
-		bokeh:
-		{
-			count: 30,
-			size:
-			{
-				min: 0.1,
-				max: 0.3
-			},
-			alpha:
-			{
-				min: 0.05,
-				max: 0.4
-			},
-			jitter:
-			{
-				x: 0.3,
-				y: 0.3
-			}
-		},
-		speed:
-		{
-			min: 0.0001,
-			max: 0.001
-		},
+	 var options =
+    {
+        resolution: 5,
+        gradient:
+        {
+            resolution: 6,
+            smallRadius: 0,
+            hue:
+            {
+                min: 221,
+                max: 299
+            },
+            saturation:
+            {
+                min: 44,
+                max: 100
+            },
+            lightness:
+            {
+                min: 28,
+                max: 36
+            }
+        },
+        bokeh:
+        {
+            count: 6,
+            size:
+            {
+                min: 0.5,
+                max: 0.5
+            },
+            alpha:
+            {
+                min: 0.15,
+                max: 0.25
+            },
+            jitter:
+            {
+                x: 0.3,
+                y: 0.3
+            }
+        },
+        speed:
+        {
+            min: 0.001,
+            max: 0.001
+        },
 		debug:
 		{
 			strokeBokeh: false,
@@ -72,7 +68,7 @@ window.onload = () => {
 	//buffers
 	var gradientBuffer = document.createElement('canvas').getContext('2d');
 	var circleBuffer = document.createElement('canvas').getContext('2d');
-	//render time, fps calculations, debug
+	//render time, fps calculations
 	var time;
 	var targetFps = 60; //not actual fps, but updates per second
 	var curFps = 0;
@@ -138,6 +134,7 @@ window.onload = () => {
 			return this.h + ", " + this.s + "%, " + this.l +"%";
 		}
 	}
+
 	function ColorPoint(x, y, color) {
 		this.x = x;
 		this.y = y;
@@ -197,6 +194,7 @@ window.onload = () => {
 			max: options.bokeh.jitter.y
 		}));
 	}
+
 	function resize() {
 		var width = window.innerWidth;
 		var height = window.innerHeight;
@@ -367,8 +365,8 @@ window.onload = () => {
 	//does not seem to impact performance
 	window.addEventListener("resize", resize);
 
-	//init and render :)
+	//init and render 
 	init();
 	render();
 }
-*/
+ 
