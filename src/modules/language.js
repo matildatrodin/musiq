@@ -9,11 +9,21 @@ class Language extends Component {
         super(props);
 
         this.state = {
-            
+            language : this.props.language,
         };
     }
 
-    languageSwitch = () => {
+    languageSwitchSwedish = () => {
+        this.setState({
+            language : "swedish",
+        })
+        alert("LANGUAGE SWITCHING");
+    }
+
+    languageSwitchEnglish = () => {
+        this.setState({
+            language : "english",
+        })
         alert("LANGUAGE SWITCHING");
     }
 
@@ -21,8 +31,8 @@ class Language extends Component {
 
         return (
             <div className="language">
-                <img className="flag" id="en" src={uk_flag} onClick={this.languageSwitch} alt="EN"/>
-                <img className="flag" id="sv" src={se_flag} onClick={this.languageSwitch} alt="SE"/>
+                <img className="flag" id="en" src={uk_flag} onClick={this.languageSwitchEnglish} alt="EN"/>
+                <img className="flag" id="sv" src={se_flag} onClick={this.languageSwitchSwedish} alt="SE"/>
             </div>
 
         );
