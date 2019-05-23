@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import SpotifyWebApi from 'spotify-web-api-js';
 import '../index.css';
 
-const spotifyApi = new SpotifyWebApi();
 
 class Game extends Component {
 
@@ -13,10 +11,19 @@ class Game extends Component {
             questionData: this.props.questionData,
             questionArray: [],
             currentQuestion: 0,
+            startGame: false,
+            nextButton: "Next question",
+            endButton: "End Game"
 
         };
         this.setQuestionArray = this.setQuestionArray.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.playSong = this.playSong.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.startGame = this.startGame.bind(this);
+        this.endGame = this.endGame.bind(this);
+
+
     }
 
     setQuestionArray = () => {
@@ -25,6 +32,7 @@ class Game extends Component {
         for (i = 0; i < this.state.questionData.length; i++){
             questionArray.push({
                 "questionId": i,
+                "songId": this.state.questionData[i].songId,
                 "option1": this.state.questionData[i].artist,
                 "option2": this.state.questionData[i].relatedArtists[0].name,
                 "option3": this.state.questionData[i].relatedArtists[1].name,
@@ -37,6 +45,25 @@ class Game extends Component {
         })
     };
 
+
+    startGame(){
+        this.props.play(this.state.questionArray[0].songId);
+        this.setState({
+            startGame: true
+        })
+    }
+
+    endGame() {
+        this.setState({
+            currentQuestion:  this.state.currentQuestion + 1
+        })
+    }
+
+
+    playSong(songId) {
+        this.props.play(songId);
+    }
+
     componentWillMount() {
         this.setQuestionArray();
     }
@@ -45,25 +72,60 @@ class Game extends Component {
         console.log(choice.target.value);
         if (choice.target.value === this.state.questionArray[this.state.currentQuestion].option1
             && this.state.currentQuestion === this.state.questionArray[this.state.currentQuestion].questionId){
-            console.log("correct")
+            console.log("correct");
         } else {
             console.log("wrong")
         }
+    };
+
+    nextQuestion(){
+
         if (this.state.currentQuestion < this.state.questionArray.length){
             this.setState({
                 currentQuestion:  this.state.currentQuestion + 1,
-            })
-        } else {
-            console.log("No more questions")
+            });
+            this.playSong(this.state.questionArray[this.state.currentQuestion + 1].songId);
         }
-    };
+
+    }
+
+
 
 
     render() {
 
-        console.log(this.state);
+        //console.log(this.state);
 
-        if (this.state.currentQuestion !== this.state.questionArray.length) {
+        if (this.state.startGame === false) {
+            return(
+                <div>
+                    <button onClick={this.startGame}>Start Quiz</button>
+                </div>
+            )
+        } else if (this.state.currentQuestion === this.state.questionArray.length && this.state.startGame === true)  {
+
+            return(
+                <div>Quiz is done</div>
+            )
+        } else if (this.state.currentQuestion === this.state.questionArray.length - 1 && this.state.startGame === true){
+
+            return(
+                <div>
+                    <button onClick={this.handleClick}
+                            value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
+                    <button onClick={this.handleClick}
+                            value={this.state.questionArray[this.state.currentQuestion].option2}>{this.state.questionArray[this.state.currentQuestion].option2}</button>
+                    <button onClick={this.handleClick}
+                            value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
+                    <button onClick={this.handleClick}
+                            value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
+                    <button onClick={this.endGame}>{this.state.endButton}</button>
+                </div>
+            )
+        }
+
+
+        else if (this.state.currentQuestion !== this.state.questionArray.length && this.state.startGame === true) {
 
             return (
                 <div>
@@ -75,11 +137,9 @@ class Game extends Component {
                             value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
                     <button onClick={this.handleClick}
                             value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
+                    <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
                 </div>
             );
-        } else {
-
-            return("Quiz is done")
         }
     }
 }
