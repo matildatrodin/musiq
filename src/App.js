@@ -36,7 +36,6 @@ class App extends Component {
 
             chosenPlaylist: "",
             playlistTracks: [],
-            currentTrackId: "7lP1Itp08ETqtjqJRTbmeh",
             deviceId: "",
 
             questionData: "",
