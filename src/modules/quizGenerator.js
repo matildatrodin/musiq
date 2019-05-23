@@ -21,6 +21,7 @@ class QuizGenerator extends Component {
         this.getTracks = this.getTracks.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.changeAmount = this.changeAmount.bind(this);
         this.getRelatedArtist = this.getRelatedArtist.bind(this);
 
 
@@ -36,6 +37,10 @@ class QuizGenerator extends Component {
     handleSubmit(event){
         event.preventDefault();
         this.generateQuizData();
+    }
+
+    changeAmount(){
+        this.setState({quizReady: false})
     }
 
 
@@ -96,7 +101,7 @@ class QuizGenerator extends Component {
 
     render() {
 
-        //console.log(this.state);
+        console.log(this.state);
 
         if(this.state.quizReady === false) {
 
@@ -117,6 +122,7 @@ class QuizGenerator extends Component {
             return (
                 <div>
                     <p>Your quiz is ready</p>
+                    <button onClick={this.changeAmount}>Edit</button>
                     <button onClick={this.handleClick}>Start Quiz</button>
                 </div>
 
