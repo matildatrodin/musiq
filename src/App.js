@@ -31,18 +31,22 @@ class App extends Component {
             language: "english",
             token: params.access_token,
             loggedIn: token ? true : false,
+
+            userImage: "",
+            userName: "",
+
             nowPlaying: { name: 'Not Checked', albumArt: '' },
             playlistGrid: [],
 
             chosenPlaylist: "",
             playlistTracks: [],
-            currentTrackId: "7lP1Itp08ETqtjqJRTbmeh",
             deviceId: "",
 
             questionData: "",
 
             currentPage: 'homePage',
         };
+
         this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
         this.moveToHomePage = this.moveToHomePage.bind(this);
@@ -51,6 +55,7 @@ class App extends Component {
         this.handleLoadFailure = this.handleLoadSuccess.bind(this);
         this.cb = this.cb.bind(this);
         this.play = this.play.bind(this);
+        this.getUser = this.getUser.bind(this);
 
     }
 
@@ -66,6 +71,15 @@ class App extends Component {
         return hashParams;
     }
 
+    getUser(){
+        spotifyApi.getMe()
+            .then((response) =>{
+                this.setState({
+                    userImage: response.images[0].url,
+                    userName: response.display_name
+                });
+            })
+    }
 
     moveToHomePage = () => {
         if (this.state.loggedIn === false) {
@@ -211,6 +225,7 @@ class App extends Component {
 
     componentDidMount() {
         this.getPlaylist();
+        this.getUser();
         window.onSpotifyWebPlaybackSDKReady = () => {
             this.handleLoadSuccess();
         };
@@ -266,12 +281,12 @@ class App extends Component {
                         <div className="header">
                             <h1 class="logo">musi<span id="q">Q</span></h1>
 
-                            <div class="user">
-                                <img className="profilePic"/>
-                                <div className="username">username</div>
-                                <Language/>
-                            </div>
+                        <div class="user">
+                            <img className="profilePic" src={this.state.userImage}/>
+                            <div className="username">{this.state.userName}</div>
+                            <Language/>
                         </div>
+                    </div>
 
                         <div className="createQuiz">
                             <a class="buttonCreate" href="http://localhost:8888/login">Create Quiz</a>
