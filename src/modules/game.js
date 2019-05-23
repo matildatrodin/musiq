@@ -11,7 +11,6 @@ class Game extends Component {
             questionData: this.props.questionData,
             questionArray: [],
             currentQuestion: 0,
-            startGame: false,
             nextButton: "Next question",
             endButton: "End Game"
 
@@ -20,7 +19,6 @@ class Game extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.playSong = this.playSong.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
-        this.startGame = this.startGame.bind(this);
         this.endGame = this.endGame.bind(this);
 
 
@@ -46,13 +44,6 @@ class Game extends Component {
     };
 
 
-    startGame(){
-        this.props.play(this.state.questionArray[0].songId);
-        this.setState({
-            startGame: true
-        })
-    }
-
     endGame() {
         this.setState({
             currentQuestion:  this.state.currentQuestion + 1
@@ -66,6 +57,11 @@ class Game extends Component {
 
     componentWillMount() {
         this.setQuestionArray();
+    }
+
+    componentDidMount() {
+        this.playSong(this.state.questionArray[0].songId);
+
     }
 
     handleClick(choice){
@@ -96,18 +92,12 @@ class Game extends Component {
 
         //console.log(this.state);
 
-        if (this.state.startGame === false) {
-            return(
-                <div>
-                    <button onClick={this.startGame}>Start Quiz</button>
-                </div>
-            )
-        } else if (this.state.currentQuestion === this.state.questionArray.length && this.state.startGame === true)  {
+        if (this.state.currentQuestion === this.state.questionArray.length)  {
 
             return(
                 <div>Quiz is done</div>
             )
-        } else if (this.state.currentQuestion === this.state.questionArray.length - 1 && this.state.startGame === true){
+        } else if (this.state.currentQuestion === this.state.questionArray.length - 1){
 
             return(
                 <div>
@@ -125,7 +115,7 @@ class Game extends Component {
         }
 
 
-        else if (this.state.currentQuestion !== this.state.questionArray.length && this.state.startGame === true) {
+        else if (this.state.currentQuestion !== this.state.questionArray.length) {
 
             return (
                 <div>
