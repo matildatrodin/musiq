@@ -207,24 +207,16 @@ html, body, #root, .main, .backgroundPicture, .backgroundFilter, .create {
 @media screen and (min-width: 768px) {
 	.box {
 		height: 65%;
-		background-color: var(--musiq-black);
-		padding: 50px;
 		display: flex;
 	}
 
 	.saved {
 		width: 50%;
 		height: 100%;
-		color: var(--musiq-white);
-	}
-
-	.saved h2 {
-		margin-bottom: 20px;
 	}
 
 	.playlist-grid {
 		display: flex;
-		flex-wrap: wrap;
 	}
 
 }
