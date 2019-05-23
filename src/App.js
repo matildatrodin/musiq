@@ -146,7 +146,7 @@ class App extends Component {
 
         // Ready
         player.addListener('ready', ({ device_id }) => {
-            //this.play(device_id);
+            //this.pla<y(device_id);
             console.log('Ready with Device ID', device_id);
 
             this.setState({
