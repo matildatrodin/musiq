@@ -31,18 +31,22 @@ class App extends Component {
             language: "english",
             token: params.access_token,
             loggedIn: token ? true : false,
+
+            userImage: "",
+            userName: "",
+
             nowPlaying: { name: 'Not Checked', albumArt: '' },
             playlistGrid: [],
 
             chosenPlaylist: "",
             playlistTracks: [],
-            currentTrackId: "7lP1Itp08ETqtjqJRTbmeh",
             deviceId: "",
 
             questionData: "",
 
             currentPage: 'homePage',
         };
+
         this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
         this.moveToHomePage = this.moveToHomePage.bind(this);
@@ -51,6 +55,7 @@ class App extends Component {
         this.handleLoadFailure = this.handleLoadSuccess.bind(this);
         this.cb = this.cb.bind(this);
         this.play = this.play.bind(this);
+        this.getUser = this.getUser.bind(this);
 
     }
 
@@ -66,6 +71,15 @@ class App extends Component {
         return hashParams;
     }
 
+    getUser(){
+        spotifyApi.getMe()
+            .then((response) =>{
+                this.setState({
+                    userImage: response.images[0].url,
+                    userName: response.display_name
+                });
+            })
+    }
 
     moveToHomePage = () => {
         if (this.state.loggedIn === false) {
@@ -211,6 +225,7 @@ class App extends Component {
 
     componentDidMount() {
         this.getPlaylist();
+        this.getUser();
         window.onSpotifyWebPlaybackSDKReady = () => {
             this.handleLoadSuccess();
         };
@@ -218,133 +233,138 @@ class App extends Component {
 
 
 
-  render() {
+    render() {
         const { loggedIn } = this.state;
         const { currentPage } = this.state;
         const { playlistGrid } = this.state;
 
         //console.log(this.state);
 
-      /* Login page */
-      if (loggedIn === false ) {
-            return (
-                <div className="backgroundPicture">
+        /* Login page */
+        if (loggedIn === false ) {
+                return (
+                    <div className="backgroundPicture">
 
-                    <canvas src={background_animation} id="background"></canvas>
+                        <canvas src={background_animation} id="background"></canvas>
 
-                    <div className="backgroundFilter">
+                        <div className="backgroundFilter">
 
-                        <div className="float_language">
-                            <Language
-                                language = {this.state.language}
-                            />
+                            <div className="float_language">
+                                <Language
+                                    language = {this.state.language}
+                                />
+                            </div>
+
+                            <h1 class="logo">musi<span id="q">Q</span></h1>
+                            <a class="spotifyButton" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
+
                         </div>
-
-                        <h1 class="logo">musi<span id="q">Q</span></h1>
-                        <a class="spotifyButton" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
-
                     </div>
-                </div>
-            );
-      }
+                );
+        }
 
-      /* Homepage */
-      if (loggedIn === true && currentPage === 'homePage') {
+        /* Homepage */
+        if (loggedIn === true && currentPage === 'homePage') {
 
-        return (
-            <div className="main">
-                <Script
-                    url="https://sdk.scdn.co/spotify-player.js"
-                    onCreate={this.handleScriptCreate.bind(this)}
-                    onError={this.handleScriptError.bind(this)}
-                    onLoad={this.handleScriptLoad.bind(this)}
-                />
-                <div className="banner">
+            return (
+                <div className="main">
+                    <Script
+                        url="https://sdk.scdn.co/spotify-player.js"
+                        onCreate={this.handleScriptCreate.bind(this)}
+                        onError={this.handleScriptError.bind(this)}
+                        onLoad={this.handleScriptLoad.bind(this)}
+                    />
+                    <div className="banner">
 
-                    <canvas src={background_animation} id="background"></canvas>
+                        <canvas src={background_animation} id="background"></canvas>
 
-                    <div className="header">
-                        <h1 class="logo">musi<span id="q">Q</span></h1>
+                        <div className="header">
+                            <h1 class="logo">musi<span id="q">Q</span></h1>
 
                         <div class="user">
-                            <img className="profilePic"/>
-                            <div className="username">username</div>
+                            <img className="profilePic" src={this.state.userImage}/>
+                            <div className="username">{this.state.userName}</div>
                             <Language/>
                         </div>
                     </div>
 
-                    <div className="createQuiz">
-                        <a class="buttonCreate" href="http://localhost:8888/login">Create Quiz</a>
+                        <div className="createQuiz">
+                            <a class="buttonCreate" href="http://localhost:8888/login">Create Quiz</a>
+                        </div>
+
+                    </div>
+
+                    <div className="box">
+
+                        <div className="saved">
+                            <h2>Saved Quizzes</h2>
+                            {/*
+                            <div className='quiz-grid'>
+                                {quizGrid.map(quiz =>(
+                                <GridItem
+                                    key={quizGrid.quizId}
+                                    moveToCreateQuiz = {this.moveToCreateQuiz}
+                                    quiz = {quiz}
+                                    chosenQuiz = {this.state.chosenQuiz}/>
+                                ) )}
+                            </div>
+                            */}
+                        </div>
+
+                        <div className="saved">
+                            <h2>Saved Playlists</h2>
+                            <div className='playlist-grid'>
+                                {playlistGrid.map(playlist =>(
+                                <GridItem
+                                    key={playlistGrid.playlistId}
+                                    moveToCreateQuiz = {this.moveToCreateQuiz}
+                                    playlist = {playlist}
+                                    chosenPlaylist = {this.state.chosenPlaylist}/>
+                                ) )}
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
+            );
 
-                <div className="box">
+        }
 
-                    <div className="saved">
-                        <h2>Saved Quizzes</h2>
-                        {/*
-                        <div className='quiz-grid'>
-                            {quizGrid.map(quiz =>(
-                            <GridItem
-                                key={quizGrid.quizId}
-                                moveToCreateQuiz = {this.moveToCreateQuiz}
-                                quiz = {quiz}
-                                chosenQuiz = {this.state.chosenQuiz}/>
-                            ) )}
-                        </div>
-                        */}
-                    </div>
-
-                    <div className="saved">
-                        <h2>Saved Playlists</h2>
-                        <div className='playlist-grid'>
-                            {playlistGrid.map(playlist =>(
-                            <GridItem
-                                key={playlistGrid.playlistId}
-                                moveToCreateQuiz = {this.moveToCreateQuiz}
-                                playlist = {playlist}
-                                chosenPlaylist = {this.state.chosenPlaylist}/>
-                            ) )}
-                        </div>
-                    </div>
-
+        /* Create a quiz page */
+        if (loggedIn === true && currentPage === 'createQuizPage'){
+            return (
+                <div className="create">
+                    <canvas src={background_animation} id="background"></canvas>
+                    <img src={this.state.chosenPlaylist.image}/>
+                    <p>{this.state.chosenPlaylist.playlistName}</p>
+                    <QuizGenerator
+                        moveToGame = {this.moveToGame}
+                        chosenPlaylist = {this.state.chosenPlaylist}
+                        questionData = {this.state.questionData}
+                    />
                 </div>
+            )
+        }
 
-            </div>
-        );
+        /* Game Page */
 
-      }
-
-      /* Create a quiz page */
-      if (loggedIn === true && currentPage === 'createQuizPage'){
-          return (
-              <div className="create">
-                  <canvas src={background_animation} id="background"></canvas>
-                  <img src={this.state.chosenPlaylist.image}/>
-                  <p>{this.state.chosenPlaylist.playlistName}</p>
-                  <QuizGenerator
-                    moveToGame = {this.moveToGame}
-                    chosenPlaylist = {this.state.chosenPlaylist}
+        if (loggedIn === true && currentPage === 'gamePage'){
+            return (
+                <div className="game">
+                    <div class="navBar" id="quizBar">
+                        <span class="quizTitle">QuizTitle</span>
+                        <span class="questionNum"></span>
+                        <span class="userName">UserName </span>
+                    </div>
+                    <Game
                     questionData = {this.state.questionData}
-                  />
-              </div>
-          )
-      }
-
-      /* Game Page */
-
-      if (loggedIn === true && currentPage === 'gamePage'){
-          return (
-              <div className="App">
-              <Game
-                  questionData = {this.state.questionData}
-                  play = {this.play}
-              />
-              </div>
-          )
-      }
-  }
+                    play = {this.play}
+                    />
+                </div>
+            )
+        }
+    }
 
 }
 
