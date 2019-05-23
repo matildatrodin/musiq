@@ -82,12 +82,10 @@ class App extends Component {
     }
 
     moveToHomePage = () => {
-        if (this.state.loggedIn === false) {
-            this.setState({
-                currentPage: 'homePage',
-            });
-            console.log('State set to homepage');
-        }
+        this.setState({
+            currentPage: 'homePage',
+        });
+        console.log('State set to homepage');
     };
 
     moveToCreateQuiz = (playlist) => {
@@ -360,6 +358,7 @@ class App extends Component {
                     <Game
                     questionData = {this.state.questionData}
                     play = {this.play}
+                    moveToHomePage = {this.moveToHomePage}
                     />
                 </div>
             )
