@@ -337,10 +337,11 @@ class App extends Component {
         if (loggedIn === true && currentPage === 'gamePage'){
             return (
                 <div className="game">
+                    <canvas src={background_animation} id="background"></canvas>
                     <div class="navBar" id="quizBar">
-                        <span class="quizTitle">QuizTitle</span>
-                        <span class="questionNum"></span>
-                        <span class="userName">UserName </span>
+                        <div class="quizTitle">QuizTitle</div>
+                        <div class="questionNum">01 of 30</div>
+                        <div class="user">UserName</div>
                     </div>
                     <Game
                     questionData = {this.state.questionData}
