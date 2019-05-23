@@ -113,11 +113,7 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 /* Main page */
 
 .banner {
-	height: 35%;
-	padding: 50px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	padding: 20px;
 }
 
 #background {
@@ -137,17 +133,39 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 }
 
 .user {
+	margin-right: 5%;
 	color: var(--musiq-white);
 	font-size: 2rem;
-	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+}
+
+/*Desktop version only*/
+@media screen and (min-width: 768px){
+	.banner {
+		height: 35%;
+		padding: 50px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.user {
+		margin: 0%;
+		display: flex;
+	}
+
+	.createQuiz {
+		margin-top: 0;
+	}
+
 }
 
 .createQuiz {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-top: 40px;
 }
 
 .buttonCreate {
@@ -172,15 +190,15 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 }
 
 .box {
-	height: 65%;
+	height: 200%;
 	background-color: var(--musiq-black);
 	padding: 50px;
-	display: flex;
+	margin-top: 50px;
 }
 
 .saved {
 	width: 50%;
-	height: 100%;
+	height: 50%;
 	color: var(--musiq-white);
 }
 
@@ -189,16 +207,37 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 }
 
 .playlist-grid {
-	display: flex;
+	width: 50%;
+	height: 50%;
 	flex-wrap: wrap;
-/*
-	display: grid;
-	grid-gap: 20px;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	max-width: 1200px;
-	margin: 20px auto 0 auto;
-*/
 }
+
+/*Desktop verson*/
+@media screen and (min-width: 768px) {
+	.box {
+		height: 65%;
+		background-color: var(--musiq-black);
+		padding: 50px;
+		display: flex;
+	}
+
+	.saved {
+		width: 50%;
+		height: 100%;
+		color: var(--musiq-white);
+	}
+
+	.saved h2 {
+		margin-bottom: 20px;
+	}
+
+	.playlist-grid {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+}
+
 
 .single {
 	margin: 0 30px 30px 0;
