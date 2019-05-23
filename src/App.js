@@ -31,6 +31,7 @@ class App extends Component {
             language: "english",
             token: params.access_token,
             loggedIn: token ? true : false,
+            tutorial: false,
 
             userImage: "",
             userName: "",
@@ -39,6 +40,7 @@ class App extends Component {
             playlistGrid: [],
 
             chosenPlaylist: "",
+            playlistChosen: false,
             playlistTracks: [],
             deviceId: "",
 
@@ -50,7 +52,8 @@ class App extends Component {
         this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
         this.moveToHomePage = this.moveToHomePage.bind(this);
-        this.moveToCreateQuiz = this.moveToCreateQuiz.bind(this);
+        this.startTutorial = this.startTutorial.bind(this);
+        this.startToCreateQuiz = this.startToCreateQuiz.bind(this);
         this.handleLoadSuccess = this.handleLoadSuccess.bind(this);
         this.handleLoadFailure = this.handleLoadSuccess.bind(this);
         this.cb = this.cb.bind(this);
@@ -84,24 +87,33 @@ class App extends Component {
     moveToHomePage = () => {
         this.setState({
             currentPage: 'homePage',
+            tutorial: false
         });
         console.log('State set to homepage');
     };
 
-    moveToCreateQuiz = (playlist) => {
+    startTutorial = () => {
+        this.setState({
+            tutorial: true
+        });
+        console.log('State set to homepage + tutorial');
+
+    };
+
+    startToCreateQuiz = (playlist) => {
         this.setState({
             chosenPlaylist: {
                 "playlistId": playlist.playlistId,
                 "image": playlist.image,
                 "playlistName": playlist.playlistName},
+            playlistChosen: true
 
-            currentPage: 'createQuizPage'
+            //currentPage: 'createQuizPage'
 
         });
 
         console.log('State set to createQuizPage');
         console.log(playlist);
-        console.log(this.state.chosenPlaylist);
     };
 
     moveToGame = (questionData) => {
@@ -236,7 +248,7 @@ class App extends Component {
         const { currentPage } = this.state;
         const { playlistGrid } = this.state;
 
-        //console.log(this.state);
+        console.log(this.state);
 
         /* Login page */
         if (loggedIn === false ) {
@@ -262,7 +274,7 @@ class App extends Component {
         }
 
         /* Homepage */
-        if (loggedIn === true && currentPage === 'homePage') {
+        if (loggedIn === true && currentPage === 'homePage' && this.state.tutorial === false) {
 
             return (
                 <div className="main">
@@ -286,6 +298,8 @@ class App extends Component {
                         </div>
                     </div>
 
+                        <button onClick={this.startTutorial}>Start tutorial</button>
+
                         <div className="createQuiz">
                             <a class="buttonCreate" href="http://localhost:8888/login">Create Quiz</a>
                         </div>
@@ -294,20 +308,6 @@ class App extends Component {
 
                     <div className="box">
 
-                        <div className="saved">
-                            <h2>Saved Quizzes</h2>
-                            {/*
-                            <div className='quiz-grid'>
-                                {quizGrid.map(quiz =>(
-                                <GridItem
-                                    key={quizGrid.quizId}
-                                    moveToCreateQuiz = {this.moveToCreateQuiz}
-                                    quiz = {quiz}
-                                    chosenQuiz = {this.state.chosenQuiz}/>
-                                ) )}
-                            </div>
-                            */}
-                        </div>
 
                         <div className="saved">
                             <h2>Saved Playlists</h2>
@@ -315,10 +315,25 @@ class App extends Component {
                                 {playlistGrid.map(playlist =>(
                                 <GridItem
                                     key={playlistGrid.playlistId}
-                                    moveToCreateQuiz = {this.moveToCreateQuiz}
+                                    startToCreateQuiz = {this.startToCreateQuiz}
                                     playlist = {playlist}
                                     chosenPlaylist = {this.state.chosenPlaylist}/>
                                 ) )}
+                            </div>
+                        </div>
+
+                        <div className="saved">
+                            <h2>Quiz generator</h2>
+                            <div className="create">
+                                <canvas src={background_animation} id="background"></canvas>
+                                <img src={this.state.chosenPlaylist.image}/>
+                                <p>{this.state.chosenPlaylist.playlistName}</p>
+                                {this.state.playlistChosen === true && <QuizGenerator
+                                    moveToGame = {this.moveToGame}
+                                    chosenPlaylist = {this.state.chosenPlaylist}
+                                    playlistChosen = {this.state.playlistChosen}
+                                    questionData = {this.state.questionData}/>
+                                }
                             </div>
                         </div>
 
@@ -329,21 +344,76 @@ class App extends Component {
 
         }
 
-        /* Create a quiz page */
-        if (loggedIn === true && currentPage === 'createQuizPage'){
+        /* Homepage */
+        if (loggedIn === true && currentPage === 'homePage' && this.state.tutorial === true) {
+
             return (
-                <div className="create">
-                    <canvas src={background_animation} id="background"></canvas>
-                    <img src={this.state.chosenPlaylist.image}/>
-                    <p>{this.state.chosenPlaylist.playlistName}</p>
-                    <QuizGenerator
-                        moveToGame = {this.moveToGame}
-                        chosenPlaylist = {this.state.chosenPlaylist}
-                        questionData = {this.state.questionData}
+                <div className="main">
+                    <Script
+                        url="https://sdk.scdn.co/spotify-player.js"
+                        onCreate={this.handleScriptCreate.bind(this)}
+                        onError={this.handleScriptError.bind(this)}
+                        onLoad={this.handleScriptLoad.bind(this)}
                     />
+                    <div className="banner">
+
+                        <canvas src={background_animation} id="background"></canvas>
+
+                        <div className="header">
+                            <h1 class="logo">musi<span id="q">Q</span></h1>
+
+                            <div class="user">
+                                <img className="profilePic" src={this.state.userImage}/>
+                                <div className="username">{this.state.userName}</div>
+                                <Language/>
+                            </div>
+                        </div>
+
+                        <button onClick={this.moveToHomePage}>End tutorial</button>
+
+                        <div className="createQuiz">
+                            <a class="buttonCreate" href="http://localhost:8888/login">Create Quiz</a>
+                        </div>
+
+                    </div>
+
+                    <div className="box">
+
+                        <div className="saved">
+                            <h2>Saved Playlists</h2>
+                            <div className='playlist-grid'>
+                                {playlistGrid.map(playlist =>(
+                                    <GridItem
+                                        key={playlistGrid.playlistId}
+                                        startToCreateQuiz = {this.startToCreateQuiz}
+                                        playlist = {playlist}
+                                        chosenPlaylist = {this.state.chosenPlaylist}/>
+                                ) )}
+                            </div>
+                        </div>
+
+                        <div className="saved">
+                            <h2>Quiz generator</h2>
+                            <div className="create">
+                                <canvas src={background_animation} id="background"></canvas>
+                                <img src={this.state.chosenPlaylist.image}/>
+                                <p>{this.state.chosenPlaylist.playlistName}</p>
+                                {this.state.playlistChosen === true && <QuizGenerator
+                                    moveToGame = {this.moveToGame}
+                                    chosenPlaylist = {this.state.chosenPlaylist}
+                                    playlistChosen = {this.state.playlistChosen}
+                                    questionData = {this.state.questionData}/>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-            )
+            );
+
         }
+
 
         /* Game Page */
 

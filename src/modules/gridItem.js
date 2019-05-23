@@ -13,7 +13,7 @@ class GridItem extends Component {
         };
     }
 
-    handleClick = () => { this.props.moveToCreateQuiz(this.props.playlist); };
+    handleClick = () => { this.props.startToCreateQuiz(this.props.playlist); };
 
 
 
