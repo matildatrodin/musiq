@@ -12,7 +12,12 @@ class Game extends Component {
             questionArray: [],
             currentQuestion: 0,
             nextButton: "Next question",
-            endButton: "End Game"
+            endButton: "End Game",
+            correctTitle: "Correct answers",
+            wrongTitle: "Wrong answers",
+            returnButton: "Return to menu",
+            correct: 0,
+            wrong: 0
 
         };
         this.setQuestionArray = this.setQuestionArray.bind(this);
@@ -20,6 +25,7 @@ class Game extends Component {
         this.playSong = this.playSong.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.endGame = this.endGame.bind(this);
+        this.returnToMenu = this.returnToMenu.bind(this);
 
 
     }
@@ -50,6 +56,10 @@ class Game extends Component {
         })
     }
 
+    returnToMenu(){
+        this.props.moveToHomePage();
+    }
+
 
     playSong(songId) {
         this.props.play(songId);
@@ -68,8 +78,14 @@ class Game extends Component {
         console.log(choice.target.value);
         if (choice.target.value === this.state.questionArray[this.state.currentQuestion].option1
             && this.state.currentQuestion === this.state.questionArray[this.state.currentQuestion].questionId){
+            this.setState({
+                correct: this.state.correct + 1
+            });
             console.log("correct");
         } else {
+            this.setState({
+                wrong: this.state.wrong + 1
+            });
             console.log("wrong")
         }
     };
@@ -90,19 +106,24 @@ class Game extends Component {
 
     render() {
 
-        //console.log(this.state);
+        console.log(this.state);
 
         if (this.state.currentQuestion === this.state.questionArray.length)  {
 
             return(
-                <div className="game_body">
-                    Complete!
+                <div>
+                    <p>{this.state.correctTitle}:{this.state.correct}</p>
+                    <p>{this.state.wrongTitle}:{this.state.wrong}</p>
+                    <button onClick={this.returnToMenu}>{this.state.returnButton}</button>
                 </div>
             )
         } else if (this.state.currentQuestion === this.state.questionArray.length - 1){
 
             return(
-                <div className="game_body">
+                <div>
+                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
+                    <p>{this.state.correctTitle}:{this.state.correct}</p>
+                    <p>{this.state.wrongTitle}:{this.state.wrong}</p>
                     <button onClick={this.handleClick}
                             value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
                     <button onClick={this.handleClick}
@@ -120,7 +141,11 @@ class Game extends Component {
         else if (this.state.currentQuestion !== this.state.questionArray.length) {
 
             return (
-                <div className="game_body">
+                <div>
+                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
+                    <p>{this.state.correctTitle}:{this.state.correct}</p>
+                    <p>{this.state.wrongTitle}:{this.state.wrong}</p>
+
                     <button onClick={this.handleClick}
                             value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
                     <button onClick={this.handleClick}

@@ -14,6 +14,12 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+* {
+	padding: 0;
+	margin: 0;
+	border: 1px solid red;
+}
+
 @font-face {
 	font-family: 'NATS';
 	src: url("resources/fonts/NATS-Regular.ttf");
@@ -109,40 +115,48 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 
 /* Main page */
 
-.banner {
-	padding: 20px;
-}
-
 #background {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: -10;
-	width: 100%;
-	height: auto;
-	background-color: var(--musiq-black-transparent);
+	/*
+	position: absolute;
+	z-index: -5; */
+	display: none;
 }
 
+.banner {
+	background: var(--musiq-pink);
+}
 .header {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
+	padding: 40px 50px;
 }
 
 .user {
 	width: 50%;
 	color: var(--musiq-white);
 	font-size: 2rem;
+	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
 
+.username {
+	padding: 10px;
+}
 
-.createQuiz {
+.userPic {
+	object-fit: cover;
+	border-radius: 50px;
+	width: 65px;
+  	height: 65px;
+}
+
+.createTutorial {
+	padding: 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 40px;
 }
 
 .buttonCreate {
@@ -155,9 +169,6 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 	font-size: 2.2rem;
 	font-weight: normal;
 	transition: 0.25s;
-	display: flex;
-	align-items: center;
-	padding: 10px 30px;
 }
 
 .buttonCreate:hover {
@@ -169,37 +180,28 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 .box {
 	background-color: var(--musiq-black);
 	padding: 50px;
-	margin-top: 50px;
-}
-
-.saved {
-	width: 50%;
+	display: flex;
 	color: var(--musiq-white);
 }
 
-.saved h2 {
-	margin-bottom: 20px;
-}
-
-.playlist-grid {
+.box_area {
 	width: 50%;
-	flex-wrap: wrap;
 }
 
-.single {
-	margin: 0 30px 30px 0;
+.playlists {
+	padding: 20px 0;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 
 /* Create Quiz */
-
 .create {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	color: var(--musiq-white)
 }
+
+/*
 
 .create_step {
 	display: flex;
@@ -231,6 +233,7 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 	transition: 0.25s;
 	font-size: 1.5rem;
 }
+*/
 
 
 /* Game */
