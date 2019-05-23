@@ -19,7 +19,7 @@
 	src: url("resources/fonts/NATS-Regular.ttf");
 }
 
-html, body, #root, .main, .backgroundPicture, .backgroundFilter, .create {
+html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game {
 	height: 100%;
 }
 
@@ -235,7 +235,40 @@ html, body, #root, .main, .backgroundPicture, .backgroundFilter, .create {
 	border: none;
 }
 
-.create_step input[type=submit] {
+.create_step .button {
+	border-radius: 50px;
+	background-color: var(--musiq-blue);
+	border: none;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	text-transform: none;
+	font-weight: normal;
+	transition: 0.25s;
+	font-size: 1.5rem;
+}
+
+
+/* Game */
+.game {
+	display: flex;
+	flex-direction: column;
+	color: var(--musiq-white)
+}
+
+.navBar {
+	background: var(--musiq-black);
+	padding: 30px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.game_body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.game .button {
 	border-radius: 50px;
 	background-color: var(--musiq-blue);
 	border: none;

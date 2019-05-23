@@ -98,19 +98,21 @@ class Game extends Component {
 
         if (this.state.startGame === false) {
             return(
-                <div>
-                    <button onClick={this.startGame}>Start Quiz</button>
+                <div className="game_body">
+                    <button className="button" onClick={this.startGame}>Start Quiz</button>
                 </div>
             )
         } else if (this.state.currentQuestion === this.state.questionArray.length && this.state.startGame === true)  {
 
             return(
-                <div>Quiz is done</div>
+                <div className="game_body">
+                    Complete!
+                </div>
             )
         } else if (this.state.currentQuestion === this.state.questionArray.length - 1 && this.state.startGame === true){
 
             return(
-                <div>
+                <div className="game_body">
                     <button onClick={this.handleClick}
                             value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
                     <button onClick={this.handleClick}
@@ -128,7 +130,7 @@ class Game extends Component {
         else if (this.state.currentQuestion !== this.state.questionArray.length && this.state.startGame === true) {
 
             return (
-                <div>
+                <div className="game_body">
                     <button onClick={this.handleClick}
                             value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
                     <button onClick={this.handleClick}
