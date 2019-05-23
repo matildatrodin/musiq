@@ -133,17 +133,26 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 }
 
 .user {
-	margin-right: 5%;
+	margin-left: 10%;
+	width: 50%;
 	color: var(--musiq-white);
 	font-size: 2rem;
 	justify-content: flex-end;
 	align-items: center;
 }
 
+.profilePic {
+	margin-left: 60%;
+	width: 30%;
+	height: 30%;
+	margin: 5%;
+}
+
 /*Desktop version only*/
 @media screen and (min-width: 768px){
 	.user {
-		margin: 0%;
+		margin-right: 5%;
+		width: 20%;
 		display: flex;
 	}
 
