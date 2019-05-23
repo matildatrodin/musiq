@@ -36,6 +36,14 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 	color: var(--musiq-blue);
 }
 
+.App {
+	display: flex;
+	flex-direction: column;
+	/*
+	background-color: var(--musiq-black);
+	z-index: -5; */
+}
+
 /* Login page */
 
 .backgroundPicture {
@@ -52,6 +60,27 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.float_language {
+	position: fixed;
+    right: 1%;
+    top: 1%;
+}
+
+.language {
+	padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.flag {
+	cursor: pointer;
+    height: 35px;
+    width: auto;
+    transition: 0.25s;
+    margin: 0 5px;
+    opacity: 0.5;
 }
 
 .spotifyButton {
@@ -95,9 +124,9 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: -100;
+	z-index: -10;
 	width: 100%;
-	height: 100%;
+	height: auto;
 	background-color: var(--musiq-black-transparent);
 }
 
@@ -110,6 +139,9 @@ html, body, #root, .App, .backgroundPicture, .backgroundFilter {
 .user {
 	color: var(--musiq-white);
 	font-size: 2rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 
 .createQuiz {
