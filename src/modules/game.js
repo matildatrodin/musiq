@@ -19,7 +19,6 @@ class Game extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.playSong = this.playSong.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
-        this.startGame = this.startGame.bind(this);
         this.endGame = this.endGame.bind(this);
 
 
