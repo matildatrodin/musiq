@@ -1,3 +1,4 @@
+/*
 const translations = {
     'en': {
         'login'           : 'Login with',
@@ -105,3 +106,4 @@ try {
 } catch (e) {
     console.error(e);
 }
+*/
