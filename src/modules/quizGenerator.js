@@ -96,18 +96,15 @@ class QuizGenerator extends Component {
 
     render() {
 
-        console.log(this.state);
+        //console.log(this.state);
 
         if(this.state.quizReady === false) {
 
             return (
                 <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Amount of questions:
-                            <input type="text" name="amountOfQuestions" value={this.state.amountOfQuestions}
-                                   onChange={this.handleChange}/>
-                        </label>
+                    <form className="create_step" onSubmit={this.handleSubmit}>
+                        <label>Number of Questions</label>
+                        <input type="text" name="amountOfQuestions" value={this.state.amountOfQuestions} onChange={this.handleChange}/>
                         <input type="submit" value="Submit"/>
                     </form>
                 </div>
