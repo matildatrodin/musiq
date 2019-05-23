@@ -14,6 +14,8 @@ class QuizGenerator extends Component {
             relatedArtists: "",
             questionData: "",
             amountOfQuestions: 0,
+            playlistChosen: this.props.playlistChosen,
+            chosenPlaylist: this.props.chosenPlaylist,
             quizReady: false
         };
 
@@ -55,6 +57,7 @@ class QuizGenerator extends Component {
                 }
             });
     }
+
     getRelatedArtist(artistId){
         let relatedArtists = [];
 
@@ -68,7 +71,7 @@ class QuizGenerator extends Component {
                 }
             });
         return (relatedArtists);
-        }
+    }
 
 
 
