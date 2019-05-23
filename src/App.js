@@ -297,21 +297,6 @@ class App extends Component {
                     <div className="box">
 
                         <div className="saved">
-                            <h2>Saved Quizzes</h2>
-                            {/*
-                            <div className='quiz-grid'>
-                                {quizGrid.map(quiz =>(
-                                <GridItem
-                                    key={quizGrid.quizId}
-                                    moveToCreateQuiz = {this.moveToCreateQuiz}
-                                    quiz = {quiz}
-                                    chosenQuiz = {this.state.chosenQuiz}/>
-                                ) )}
-                            </div>
-                            */}
-                        </div>
-
-                        <div className="saved">
                             <h2>Saved Playlists</h2>
                             <div className='playlist-grid'>
                                 {playlistGrid.map(playlist =>(
