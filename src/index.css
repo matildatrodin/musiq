@@ -248,9 +248,10 @@ input:focus {
 
 .navBar {
 	background: var(--musiq-black);
-	padding: 30px;
+	padding: 20px 50px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .question_body {
