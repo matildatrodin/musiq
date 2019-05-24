@@ -131,7 +131,6 @@ class Game extends Component {
             return(
                 <div className="question_body">
 
-                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
                     <div className="question">
                         <img src={this.state.questionArray[0].playlistImage}/>
                         <h1>Who's the artist of this song?</h1>
@@ -170,7 +169,6 @@ class Game extends Component {
             return (
                 <div className="question_body">
 
-                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
                     <div className="question">
                         <img src={this.state.questionArray[0].playlistImage}/>
                         <h1>Who's the artist of this song?</h1>
@@ -196,6 +194,7 @@ class Game extends Component {
                     </div>
 
                     <div class="question_next">
+                        <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
                         <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
                     </div>
 
