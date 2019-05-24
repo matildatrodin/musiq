@@ -330,7 +330,8 @@ class App extends Component {
                                     moveToGame = {this.moveToGame}
                                     chosenPlaylist = {this.state.chosenPlaylist}
                                     playlistChosen = {this.state.playlistChosen}
-                                    questionData = {this.state.questionData}/>
+                                    questionData = {this.state.questionData}
+                                    />
                                 }
                             </div>
                         </div>
@@ -399,7 +400,7 @@ class App extends Component {
                                 {this.state.playlistChosen === true && <QuizGenerator
                                     moveToGame = {this.moveToGame}
                                     chosenPlaylist = {this.state.chosenPlaylist}
-                                    playlistChosen = {this.state.playlistChosen}
+                                    /* chosenPlaylist = {this.state.playlistChosen} */
                                     questionData = {this.state.questionData}/>
                                 }
                             </div>
@@ -419,11 +420,6 @@ class App extends Component {
             return (
                 <div className="game">
                     <canvas src={background_animation} id="background"></canvas>
-                    <div className="navBar" id="quizBar">
-                        <div className="quizTitle">QuizTitle</div>
-                        <div className="questionNum">01 of 30</div>
-                        <div className="user">UserName</div>
-                    </div>
                     <Game
                     questionData = {this.state.questionData}
                     play = {this.play}

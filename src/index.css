@@ -17,7 +17,7 @@
 * {
 	padding: 0;
 	margin: 0;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 @font-face {
@@ -25,7 +25,7 @@
 	src: url("resources/fonts/NATS-Regular.ttf");
 }
 
-html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game {
+html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 	height: 100%;
 }
 
@@ -116,15 +116,11 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 /* Main page */
 
 #background {
-	/*
 	position: absolute;
-	z-index: -5; */
-	display: none;
+	z-index: -5;
+	width: 100%;
 }
 
-.banner {
-	background: var(--musiq-pink);
-}
 .header {
 	display: flex;
 	align-items: center;
@@ -133,7 +129,6 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 }
 
 .user {
-	width: 50%;
 	color: var(--musiq-white);
 	font-size: 2rem;
 	display: flex;
@@ -153,7 +148,7 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 }
 
 .createTutorial {
-	padding: 50px;
+	padding: 0 50px 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -182,6 +177,7 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 	padding: 50px;
 	display: flex;
 	color: var(--musiq-white);
+	height: 100%;
 }
 
 .box_area {
@@ -189,21 +185,31 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 }
 
 .playlists {
-	padding: 20px 0;
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.single {
+	width: 30%;
+}
+
+.playlist {
+	object-fit: cover;
+	height: 150px;
+	width: 150px;
+	border: none;
 }
 
 
 /* Create Quiz */
 .create {
 	display: flex;
+	align-items: center;
 	color: var(--musiq-white)
 }
 
-/*
-
 .create_step {
+	padding: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -233,7 +239,6 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .create, .game 
 	transition: 0.25s;
 	font-size: 1.5rem;
 }
-*/
 
 
 /* Game */
