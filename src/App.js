@@ -90,7 +90,7 @@ class App extends Component {
             currentPage: 'homePage',
             tutorial: false,
             playlistChosen: false,
-            chosenPlaylist: ""
+            chosenPlaylist: { playlistId: "", image: default_album, playlistName: "" }
         });
         console.log('State set to homepage');
     };
