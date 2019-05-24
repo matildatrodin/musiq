@@ -9,6 +9,7 @@ class Game extends Component {
 
         this.state = {
             questionData: this.props.questionData,
+            chosenPlaylist: this.props.chosenPlaylist,
             questionArray: [],
             currentQuestion: 0,
             nextButton: "Next question",
@@ -142,7 +143,17 @@ class Game extends Component {
 
             return (
                 <div>
-                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
+
+                    <div className="navBar" id="quizBar">
+                        <div className="quizTitle">{this.state.chosenPlaylist}</div>
+                        <div className="questionNum">{this.state.currentQuestion + 1} of {this.state.questionArray.length}</div>
+                        <div className="user">
+                            <img className="userPic" src={this.props.userImage}/>
+                            <div className="username">{this.props.userName}</div>
+                        </div>
+                    </div>
+
+                    
                     <p>{this.state.correctTitle}:{this.state.correct}</p>
                     <p>{this.state.wrongTitle}:{this.state.wrong}</p>
 
