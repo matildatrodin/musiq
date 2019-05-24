@@ -8,6 +8,7 @@ import Script from 'react-load-script';
 
 import './index.css';
 import spotify_white from './resources/icons/spotify_white.svg';
+import default_album from './resources/img/default.png';
 import background_animation from './resources/animations/background.js'
 import {promised} from "q";
 
@@ -39,7 +40,7 @@ class App extends Component {
             nowPlaying: { name: 'Not Checked', albumArt: '' },
             playlistGrid: [],
 
-            chosenPlaylist: "",
+            chosenPlaylist: { playlistId: "", image: default_album, playlistName: ""}, 
             playlistChosen: false,
             playlistTracks: [],
             deviceId: "",
@@ -246,6 +247,7 @@ class App extends Component {
 
 
     render() {
+
         const { loggedIn } = this.state;
         const { currentPage } = this.state;
         const { playlistGrid } = this.state;
@@ -325,7 +327,7 @@ class App extends Component {
                             <h2>Quiz generator</h2>
                             <div className="create">
                                 <div className="chosen_info">
-                                    <img src={this.state.chosenPlaylist.image}/>
+                                    <img className="chosenPlaylist" src={this.state.chosenPlaylist.image} />
                                     <p>{this.state.chosenPlaylist.playlistName}</p>
                                 </div>
                                 {this.state.playlistChosen === true && <QuizGenerator
@@ -439,6 +441,7 @@ class App extends Component {
                 </div>
             )
         }
+
     }
 
 }

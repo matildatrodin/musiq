@@ -217,6 +217,11 @@ input:focus {
 	border: none;
 }
 
+.chosenPlaylist {
+	object-fit: cover;
+	height: 350px;
+	width: 350px;
+}
 
 /* Create Quiz */
 .create {
