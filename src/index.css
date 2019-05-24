@@ -269,7 +269,7 @@ input:focus {
 }
 
 .question {
-	padding: 50px;
+	padding: 30px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -281,11 +281,10 @@ input:focus {
 	height: 150px;
 	width: 150px;
 	border: none;
+	margin-bottom: 10px;
 }
 
 .question h1 {
-	display: flex;
-	align-items: flex-end;
 	margin-left: 20px;
 }
 
