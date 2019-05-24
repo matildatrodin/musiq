@@ -402,7 +402,7 @@ class App extends Component {
                                 {this.state.playlistChosen === true && <QuizGenerator
                                     moveToGame = {this.moveToGame}
                                     chosenPlaylist = {this.state.chosenPlaylist}
-                                    chosenPlaylist = {this.state.playlistChosen}
+                                    playlistChosen = {this.state.playlistChosen}
                                     questionData = {this.state.questionData}/>
                                 }
                             </div>
@@ -425,10 +425,10 @@ class App extends Component {
                     <canvas src={background_animation} id="background"></canvas>
 
                     <div className="navBar" id="quizBar">
-                        <div className="quizTitle">Playlist</div>
+                        <div className="quizTitle">{this.state.chosenPlaylist.playlistName}</div>
                         <div className="user">
-                            {/* <img className="userPic" src={this.state.userImage}/> */ }
-                            <div className="username">Username</div>
+                            <img className="userPic" src={this.state.userImage}/>
+                            <div className="username">{this.state.userName}</div>
                         </div>
                     </div>
 
