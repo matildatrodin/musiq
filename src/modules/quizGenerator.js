@@ -50,8 +50,16 @@ class QuizGenerator extends Component {
     }
 
 
-    getTracks () {
-        spotifyApi.getPlaylistTracks(this.props.chosenPlaylist.playlistId)
+    getTracks (chosenPlaylist) {
+
+        if (this.state.playlistTracks.length > 0) {
+            this.setState({
+                playlistTracks: []
+
+            });
+        }
+
+        spotifyApi.getPlaylistTracks(chosenPlaylist.playlistId)
             .then((response) => {
                 var i;
                 for(i =0; i < response.items.length; i++) {
@@ -102,34 +110,19 @@ class QuizGenerator extends Component {
     };
 
     componentDidMount() {
-        this.getTracks();
+        this.getTracks(this.props.chosenPlaylist);
     };
 
-    /*
+
+
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({
-            playlistArray: [],
             chosenPlaylist: nextProps.chosenPlaylist,
+            playlistTracks: [],
+
         });
-        this.getTracks();
+        this.getTracks(nextProps.chosenPlaylist);
     }
-    */
-
-    /*
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextProps.chosenPlaylist !== this.state.chosenPlaylist){
-            this.setState({
-                chosenPlaylist: nextProps.chosenPlaylist,
-            });
-            console.log(nextProps.chosenPlaylist);
-            this.getTracks();
-            return true
-        } else {
-            return false
-        }
-    }
-    */
-
 
     render() {
 
