@@ -12,7 +12,7 @@ class QuizGenerator extends Component {
         this.state = {
             playlistTracks: [],
             relatedArtists: "",
-            questionData: "",
+            questionData: [],
             amountOfQuestions: 0,
             playlistChosen: this.props.playlistChosen,
             chosenPlaylist: this.props.chosenPlaylist,
@@ -38,7 +38,11 @@ class QuizGenerator extends Component {
 
     handleSubmit(event){
         event.preventDefault();
-        this.generateQuizData();
+        if (this.state.amountOfQuestions < 1){
+            console.log("You need to have at least 1 question")
+        } else {
+            this.generateQuizData();
+        }
     }
 
     changeAmount(){
@@ -100,6 +104,31 @@ class QuizGenerator extends Component {
     componentDidMount() {
         this.getTracks();
     };
+
+    /*
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({
+            playlistArray: [],
+            chosenPlaylist: nextProps.chosenPlaylist,
+        });
+        this.getTracks();
+    }
+    */
+
+    /*
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.chosenPlaylist !== this.state.chosenPlaylist){
+            this.setState({
+                chosenPlaylist: nextProps.chosenPlaylist,
+            });
+            console.log(nextProps.chosenPlaylist);
+            this.getTracks();
+            return true
+        } else {
+            return false
+        }
+    }
+    */
 
 
     render() {

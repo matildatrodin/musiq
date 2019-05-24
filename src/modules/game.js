@@ -52,7 +52,7 @@ class Game extends Component {
 
     endGame() {
         this.setState({
-            currentQuestion:  this.state.currentQuestion + 1
+            currentQuestion:  this.state.questionArray.length
         })
     }
 
@@ -137,19 +137,19 @@ class Game extends Component {
                     </div>
 
                     <div className="answers">
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
                         </div>
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option2}>{this.state.questionArray[this.state.currentQuestion].option2}</button>
                         </div>
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
                         </div>
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
                         </div>
@@ -158,7 +158,7 @@ class Game extends Component {
                     <div class="question_next">
                         <button onClick={this.endGame}>{this.state.endButton}</button>
                     </div>
-                    
+
                 </div>
             )
         }
@@ -176,19 +176,19 @@ class Game extends Component {
                     </div>
 
                     <div className="answers">
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
                         </div>
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option2}>{this.state.questionArray[this.state.currentQuestion].option2}</button>
                         </div>
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
                         </div>
-                        
+
                         <div className="answer">
                             <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
                         </div>
