@@ -193,7 +193,6 @@ input:focus {
 	padding: 50px;
 	display: flex;
 	color: var(--musiq-white);
-	height: 100%;
 }
 
 .box_area {
@@ -218,6 +217,11 @@ input:focus {
 	border: none;
 }
 
+.chosenPlaylist {
+	object-fit: cover;
+	height: 350px;
+	width: 350px;
+}
 
 /* Create Quiz */
 .create {
