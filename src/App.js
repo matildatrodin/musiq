@@ -396,7 +396,7 @@ class App extends Component {
                             <h2>Quiz generator</h2>
                             <div className="create">
                                 <div className="chosen_info">
-                                    <img src={this.state.chosenPlaylist.image}/>
+                                    <img className="chosenPlaylist" src={this.state.chosenPlaylist.image}/>
                                     <p>{this.state.chosenPlaylist.playlistName}</p>
                                 </div>
                                 {this.state.playlistChosen === true && <QuizGenerator
