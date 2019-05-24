@@ -115,7 +115,6 @@ class App extends Component {
         });
 
         console.log('State set to createQuizPage');
-        console.log(playlist);
     };
 
     moveToGame = (questionData) => {
