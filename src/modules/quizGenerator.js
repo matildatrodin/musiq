@@ -99,6 +99,7 @@ class QuizGenerator extends Component {
                     "trackName": this.state.playlistTracks[i].track.name,
                     "songId": this.state.playlistTracks[i].track.id,
                     "artistId": this.state.playlistTracks[i].track.artists[0].id,
+                    "playlistImage": this.state.chosenPlaylist.image,
                     "relatedArtists": this.getRelatedArtist(this.state.playlistTracks[i].track.artists[0].id)
             });
         }
