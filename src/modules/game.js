@@ -9,7 +9,6 @@ class Game extends Component {
 
         this.state = {
             questionData: this.props.questionData,
-            chosenPlaylist: this.props.chosenPlaylist,
             questionArray: [],
             currentQuestion: 0,
             nextButton: "Next question",
@@ -112,28 +111,49 @@ class Game extends Component {
         if (this.state.currentQuestion === this.state.questionArray.length)  {
 
             return(
-                <div>
+                <div className="question_body">
+
                     <p>{this.state.correctTitle}:{this.state.correct}</p>
                     <p>{this.state.wrongTitle}:{this.state.wrong}</p>
                     <button onClick={this.returnToMenu}>{this.state.returnButton}</button>
+
                 </div>
             )
+
         } else if (this.state.currentQuestion === this.state.questionArray.length - 1){
 
             return(
-                <div>
-                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
-                    <p>{this.state.correctTitle}:{this.state.correct}</p>
-                    <p>{this.state.wrongTitle}:{this.state.wrong}</p>
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option2}>{this.state.questionArray[this.state.currentQuestion].option2}</button>
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
-                    <button onClick={this.endGame}>{this.state.endButton}</button>
+                <div className="question_body">
+
+                    { /* <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p> */ }
+                    <div className="question">
+                        {/* playlist image */}
+                        <h1>What's the name of this song?</h1>
+                    </div>
+
+                    <div className="answers">
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
+                        </div>
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option2}>{this.state.questionArray[this.state.currentQuestion].option2}</button>
+                        </div>
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
+                        </div>
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
+                        </div>
+                    </div>
+
+                    <div class="question_next">
+                        <button onClick={this.endGame}>{this.state.endButton}</button>
+                    </div>
+                    
                 </div>
             )
         }
@@ -142,30 +162,37 @@ class Game extends Component {
         else if (this.state.currentQuestion !== this.state.questionArray.length) {
 
             return (
-                <div>
+                <div className="question_body">
 
-                    <div className="navBar" id="quizBar">
-                        <div className="quizTitle">{this.state.chosenPlaylist}</div>
-                        <div className="questionNum">{this.state.currentQuestion + 1} of {this.state.questionArray.length}</div>
-                        <div className="user">
-                            <img className="userPic" src={this.props.userImage}/>
-                            <div className="username">{this.props.userName}</div>
+                    { /* <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p> */ }
+                    <div className="question">
+                        {/* playlist image */}
+                        <h1>What's the name of this song?</h1>
+                    </div>
+
+                    <div className="answers">
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
+                        </div>
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option2}>{this.state.questionArray[this.state.currentQuestion].option2}</button>
+                        </div>
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
+                        </div>
+                        
+                        <div className="answer">
+                            <button onClick={this.handleClick} value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
                         </div>
                     </div>
 
-                    
-                    <p>{this.state.correctTitle}:{this.state.correct}</p>
-                    <p>{this.state.wrongTitle}:{this.state.wrong}</p>
+                    <div class="question_next">
+                        <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
+                    </div>
 
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option1}>{this.state.questionArray[this.state.currentQuestion].option1}</button>
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option2}>{this.state.questionArray[this.state.currentQuestion].option2}</button>
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option3}>{this.state.questionArray[this.state.currentQuestion].option3}</button>
-                    <button onClick={this.handleClick}
-                            value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
-                    <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
                 </div>
             );
         }

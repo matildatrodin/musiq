@@ -29,13 +29,19 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 	height: 100%;
 }
 
-.logo {
-	font-family: 'NATS';
-	font-size: 7rem;
+h1, h2, h3 {
 	font-style: normal;
 	font-weight: normal;
+}
+
+p {
+	margin-bottom: 5px;
+}
+
+.logo {
+	font-family: 'NATS';
+	font-size: 4em;
 	color: var(--musiq-white);
-	margin-bottom: 20px;
 }
 
 .logo #q {
@@ -45,6 +51,34 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 .main {
 	display: flex;
 	flex-direction: column;
+}
+
+button, .button {
+	border-radius: 50px;
+	border: none;
+	padding: 10px 30px;
+	text-decoration: none;
+	color: var(--musiq-white);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	transition: 0.25s;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+input {
+	padding: 10px 20px;
+	background: var(--musiq-white);
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 50px;
+	border: none;
+	outline: none;
+	margin: 20px;
+	transition: 0.25s;
+}
+
+input:focus {
+	background: #DDD;
 }
 
 /* Login page */
@@ -87,18 +121,7 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 }
 
 .spotifyButton {
-	padding: 10px 30px;
-	border-radius: 50px;
 	background-color: var(--musiq-green);
-	color: var(--musiq-white);
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	text-transform: none;
-	font-size: 1.5rem;
-	font-weight: normal;
-	transition: 0.25s;
-	display: flex;
-	align-items: center;
 }
 
 .spotifyButton img {
@@ -108,8 +131,6 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 }
 
 .spotifyButton:hover {
-	background-color: var(--musiq-green);
-	color: var(--musiq-white);
 	filter: saturate(125%);
 }
 
@@ -125,14 +146,14 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 40px 50px;
+	padding: 0 50px;
 }
 
 .user {
 	color: var(--musiq-white);
-	font-size: 2rem;
+	font-size: 1em;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -143,6 +164,7 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 .userPic {
 	object-fit: cover;
 	border-radius: 50px;
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
 	width: 65px;
   	height: 65px;
 }
@@ -155,20 +177,13 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 }
 
 .buttonCreate {
-	border-radius: 50px;
 	background-color: var(--musiq-blue);
-	color: var(--musiq-white);
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	text-transform: none;
-	font-size: 2.2rem;
-	font-weight: normal;
+	font-size: 18px;
 	transition: 0.25s;
+	margin: 5px;
 }
 
 .buttonCreate:hover {
-	background-color: var(--musiq-blue);
-	color: var(--musiq-white);
 	filter: saturate(150%);
 }
 
@@ -185,12 +200,14 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 }
 
 .playlists {
+	padding-top: 20px;
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .single {
 	width: 30%;
+	padding: 0 20px 20px 0
 }
 
 .playlist {
@@ -203,6 +220,7 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 
 /* Create Quiz */
 .create {
+	padding-top: 20px;
 	display: flex;
 	align-items: center;
 	color: var(--musiq-white)
@@ -215,31 +233,6 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 	align-items: center;
 	justify-content: center;
 }
-
-.create_step input[type=text] {
-	padding: 10px 20px;
-	background: var(--musiq-white);
-	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
-	border-radius: 50px;
-	border: none;
-}
-
-.create_step input[type=text]:focus {
-	background: #EEE;
-	border: none;
-}
-
-.create_step .button {
-	border-radius: 50px;
-	background-color: var(--musiq-blue);
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	text-transform: none;
-	font-weight: normal;
-	transition: 0.25s;
-	font-size: 1.5rem;
-}
-
 
 /* Game */
 .game {
@@ -255,20 +248,31 @@ html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 	justify-content: space-between;
 }
 
-.game_body {
+.question_body {
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 }
 
-.game .button {
-	border-radius: 50px;
-	background-color: var(--musiq-blue);
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	text-transform: none;
-	font-weight: normal;
-	transition: 0.25s;
-	font-size: 1.5rem;
+.answers {
+	width: 60%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+}
+
+.answer {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.question_next {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
