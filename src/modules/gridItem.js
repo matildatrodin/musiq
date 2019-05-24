@@ -21,7 +21,7 @@ class GridItem extends Component {
 
         return (
             <div className="single">
-                <img src={this.state.image} className='Grid-img' style={{height: 150}} onClick={this.handleClick}/>
+                <img src={this.state.image} className='playlist' onClick={this.handleClick}/>
                 <p>{this.state.playlist.playlistName}</p>
             </div>
 

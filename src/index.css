@@ -14,22 +14,34 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+* {
+	padding: 0;
+	margin: 0;
+	/* border: 1px solid red; */
+}
+
 @font-face {
 	font-family: 'NATS';
 	src: url("resources/fonts/NATS-Regular.ttf");
 }
 
-html, body, #root, .main, .backgroundPicture, .backgroundFilter, .create {
+html, body, #root, .backgroundPicture, .backgroundFilter, .main, .game {
 	height: 100%;
+}
+
+h1, h2, h3 {
+	font-style: normal;
+	font-weight: normal;
+}
+
+p {
+	margin-bottom: 5px;
 }
 
 .logo {
 	font-family: 'NATS';
-	font-size: 7rem;
-	font-style: normal;
-	font-weight: normal;
+	font-size: 4em;
 	color: var(--musiq-white);
-	margin-bottom: 20px;
 }
 
 .logo #q {
@@ -39,9 +51,35 @@ html, body, #root, .main, .backgroundPicture, .backgroundFilter, .create {
 .main {
 	display: flex;
 	flex-direction: column;
-	/*
-	background-color: var(--musiq-black);
-	z-index: -5; */
+}
+
+button, .button {
+	border-radius: 50px;
+	border: none;
+	padding: 10px 30px;
+	text-decoration: none;
+	color: var(--musiq-white);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	transition: 0.25s;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	outline: none;
+}
+
+input {
+	padding: 10px 20px;
+	background: var(--musiq-white);
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 50px;
+	border: none;
+	outline: none;
+	margin: 20px;
+	transition: 0.25s;
+}
+
+input:focus {
+	background: #DDD;
 }
 
 /* Login page */
@@ -84,18 +122,7 @@ html, body, #root, .main, .backgroundPicture, .backgroundFilter, .create {
 }
 
 .spotifyButton {
-	padding: 10px 30px;
-	border-radius: 50px;
 	background-color: var(--musiq-green);
-	color: var(--musiq-white);
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	text-transform: none;
-	font-size: 1.5rem;
-	font-weight: normal;
-	transition: 0.25s;
-	display: flex;
-	align-items: center;
 }
 
 .spotifyButton img {
@@ -105,174 +132,173 @@ html, body, #root, .main, .backgroundPicture, .backgroundFilter, .create {
 }
 
 .spotifyButton:hover {
-	background-color: var(--musiq-green);
-	color: var(--musiq-white);
 	filter: saturate(125%);
 }
 
 /* Main page */
 
-.banner {
-	padding: 20px;
-}
-
 #background {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: -10;
+	position: absolute;
+	z-index: -5;
 	width: 100%;
-	height: auto;
-	background-color: var(--musiq-black-transparent);
 }
 
 .header {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
+	padding: 0 50px;
 }
 
 .user {
-	margin-left: 10%;
-	width: 50%;
 	color: var(--musiq-white);
-	font-size: 2rem;
-	justify-content: flex-end;
+	font-size: 1em;
+	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 
-.profilePic {
-	margin-left: 60%;
-	width: 30%;
-	height: 30%;
-	margin: 5%;
+.username {
+	padding: 10px;
 }
 
-/*Desktop version only*/
-@media screen and (min-width: 768px){
-	.user {
-		margin-right: 5%;
-		width: 20%;
-		display: flex;
-	}
-
-	.createQuiz {
-		margin-top: 0;
-	}
+.userPic {
+	object-fit: cover;
+	border-radius: 50px;
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+	width: 65px;
+  	height: 65px;
 }
 
-.createQuiz {
+.createTutorial {
+	padding: 0 50px 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 40px;
 }
 
 .buttonCreate {
-	border-radius: 50px;
 	background-color: var(--musiq-blue);
-	color: var(--musiq-white);
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	text-transform: none;
-	font-size: 2.2rem;
-	font-weight: normal;
+	font-size: 18px;
 	transition: 0.25s;
-	display: flex;
-	align-items: center;
-	padding: 10px 30px;
+	margin: 5px;
 }
 
 .buttonCreate:hover {
-	background-color: var(--musiq-blue);
-	color: var(--musiq-white);
 	filter: saturate(150%);
 }
 
 .box {
-	height: 200%;
 	background-color: var(--musiq-black);
 	padding: 50px;
-	margin-top: 50px;
-}
-
-.saved {
-	width: 50%;
-	height: 50%;
+	display: flex;
 	color: var(--musiq-white);
+	height: 100%;
 }
 
-.saved h2 {
-	margin-bottom: 20px;
-}
-
-.playlist-grid {
+.box_area {
 	width: 50%;
-	height: 50%;
+}
+
+.playlists {
+	padding-top: 20px;
+	display: flex;
 	flex-wrap: wrap;
 }
 
-/*Desktop verson*/
-@media screen and (min-width: 768px) {
-	.box {
-		height: 65%;
-		display: flex;
-	}
-
-	.saved {
-		width: 50%;
-		height: 100%;
-	}
-
-	.playlist-grid {
-		display: flex;
-	}
-
+.single {
+	width: 30%;
+	padding: 0 20px 20px 0
 }
 
-
-.single {
-	margin: 0 30px 30px 0;
+.playlist {
+	object-fit: cover;
+	height: 150px;
+	width: 150px;
+	border: none;
 }
 
 
 /* Create Quiz */
-
 .create {
+	padding-top: 20px;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	color: var(--musiq-white)
 }
 
 .create_step {
+	padding: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-.create_step input[type=text] {
-	padding: 10px 20px;
-	background: var(--musiq-white);
-	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
-	border-radius: 50px;
-	border: none;
+/* Game */
+.game {
+	display: flex;
+	flex-direction: column;
+	color: var(--musiq-white)
 }
 
-.create_step input[type=text]:focus {
-	background: #EEE;
-	border: none;
+.navBar {
+	background: var(--musiq-black);
+	padding: 30px;
+	display: flex;
+	justify-content: space-between;
 }
 
-.create_step input[type=submit] {
-	border-radius: 50px;
-	background-color: var(--musiq-blue);
-	border: none;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	text-transform: none;
-	font-weight: normal;
-	transition: 0.25s;
-	font-size: 1.5rem;
+.question_body {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.question {
+	padding: 50px;
+}
+
+.answers {
+	width: 60%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+}
+
+.answer {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.answer button {
+	background-color: var(--musiq-white);
+	color: var(--musiq-black);
+	font-size: 16px;
+	width: 250px;
+	height: 50px;
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.answer button:focus {
+	background: #DDD;
+}
+
+.question_next {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+}
+
+.question_next button {
+	background-color: #008395;
 }
