@@ -141,7 +141,7 @@ input:focus {
 	position: absolute;
 	z-index: -5;
 	width: 100%;
-	height: 110%;
+	height: 100%;
 }
 
 .header {
@@ -278,8 +278,8 @@ input:focus {
 
 .question img {
 	object-fit: cover;
-	height: 200px;
-	width: 200px;
+	height: 150px;
+	width: 150px;
 	border: none;
 }
 
@@ -325,7 +325,7 @@ input:focus {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 50px;
+	padding: 40px;
 }
 
 .question_next button {
