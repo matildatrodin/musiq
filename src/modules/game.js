@@ -133,7 +133,7 @@ class Game extends Component {
                     { /* <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p> */ }
                     <div className="question">
                         {/* playlist image */}
-                        <h1>What's the name of this song?</h1>
+                        <h1>Who's the artist of this song?</h1>
                     </div>
 
                     <div className="answers">
@@ -172,7 +172,7 @@ class Game extends Component {
                     { /* <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p> */ }
                     <div className="question">
                         {/* playlist image */}
-                        <h1>What's the name of this song?</h1>
+                        <h1>Who's the artist of this song?</h1>
                     </div>
 
                     <div className="answers">
