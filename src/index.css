@@ -64,6 +64,7 @@ button, .button {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+	outline: none;
 }
 
 input {
@@ -256,6 +257,10 @@ input:focus {
 	align-items: center;
 }
 
+.question {
+	padding: 50px;
+}
+
 .answers {
 	width: 60%;
 	display: flex;
@@ -271,8 +276,29 @@ input:focus {
 	align-items: center;
 }
 
+.answer button {
+	background-color: var(--musiq-white);
+	color: var(--musiq-black);
+	font-size: 16px;
+	width: 250px;
+	height: 50px;
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.answer button:focus {
+	background: #DDD;
+}
+
 .question_next {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: 50px;
+}
+
+.question_next button {
+	background-color: #008395;
 }

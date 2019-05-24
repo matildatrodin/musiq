@@ -113,9 +113,14 @@ class Game extends Component {
             return(
                 <div className="question_body">
 
-                    <p>{this.state.correctTitle}:{this.state.correct}</p>
-                    <p>{this.state.wrongTitle}:{this.state.wrong}</p>
-                    <button onClick={this.returnToMenu}>{this.state.returnButton}</button>
+                    <div className="result">
+                        <h3>{this.state.correctTitle}: {this.state.correct}</h3>
+                        <h3>{this.state.wrongTitle}: {this.state.wrong}</h3>
+                    </div>
+
+                    <div class="question_next">
+                        <button onClick={this.returnToMenu}>{this.state.returnButton}</button>
+                    </div>
 
                 </div>
             )
