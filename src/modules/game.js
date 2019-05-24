@@ -36,6 +36,7 @@ class Game extends Component {
         for (i = 0; i < this.state.questionData.length; i++){
             questionArray.push({
                 "questionId": i,
+                "playlistImage": this.state.questionData[i].playlistImage,
                 "songId": this.state.questionData[i].songId,
                 "option1": this.state.questionData[i].artist,
                 "option2": this.state.questionData[i].relatedArtists[0].name,
@@ -130,9 +131,9 @@ class Game extends Component {
             return(
                 <div className="question_body">
 
-                    { /* <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p> */ }
+                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
                     <div className="question">
-                        {/* playlist image */}
+                        <img src={this.state.questionArray[0].playlistImage}/>
                         <h1>Who's the artist of this song?</h1>
                     </div>
 
@@ -169,9 +170,9 @@ class Game extends Component {
             return (
                 <div className="question_body">
 
-                    { /* <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p> */ }
+                    <p>{this.state.currentQuestion + 1} / {this.state.questionArray.length}</p>
                     <div className="question">
-                        {/* playlist image */}
+                        <img src={this.state.questionArray[0].playlistImage}/>
                         <h1>Who's the artist of this song?</h1>
                     </div>
 
