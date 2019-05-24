@@ -193,7 +193,6 @@ input:focus {
 	padding: 50px;
 	display: flex;
 	color: var(--musiq-white);
-	height: 100%;
 }
 
 .box_area {
