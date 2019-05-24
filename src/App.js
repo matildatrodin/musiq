@@ -142,7 +142,7 @@ class App extends Component {
         spotifyApi.getUserPlaylists()
             .then((response) => {
                 var i;
-                for(i = 0; i < response.items.length; i++) {
+                for(i = 0; i < response.items.length && i < 9; i++) {
                     this.setState(previous => ({
                         playlistGrid: [...previous.playlistGrid, {
                             "playlistId": response.items[i].id,
