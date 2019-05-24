@@ -143,7 +143,7 @@ class App extends Component {
         spotifyApi.getUserPlaylists()
             .then((response) => {
                 var i;
-                for(i = 0; i < response.items.length; i++) {
+                for(i = 0; i < response.items.length && i < 9; i++) {
                     this.setState(previous => ({
                         playlistGrid: [...previous.playlistGrid, {
                             "playlistId": response.items[i].id,
@@ -402,7 +402,7 @@ class App extends Component {
                                 {this.state.playlistChosen === true && <QuizGenerator
                                     moveToGame = {this.moveToGame}
                                     chosenPlaylist = {this.state.chosenPlaylist}
-                                    chosenPlaylist = {this.state.playlistChosen}
+                                    playlistChosen = {this.state.playlistChosen}
                                     questionData = {this.state.questionData}/>
                                 }
                             </div>
@@ -425,10 +425,10 @@ class App extends Component {
                     <canvas src={background_animation} id="background"></canvas>
 
                     <div className="navBar" id="quizBar">
-                        <div className="quizTitle">Playlist</div>
+                        <div className="quizTitle">{this.state.chosenPlaylist.playlistName}</div>
                         <div className="user">
-                            {/* <img className="userPic" src={this.state.userImage}/> */ }
-                            <div className="username">Username</div>
+                            <img className="userPic" src={this.state.userImage}/>
+                            <div className="username">{this.state.userName}</div>
                         </div>
                     </div>
 
