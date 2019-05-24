@@ -87,7 +87,9 @@ class App extends Component {
     moveToHomePage = () => {
         this.setState({
             currentPage: 'homePage',
-            tutorial: false
+            tutorial: false,
+            playlistChosen: false,
+            chosenPlaylist: ""
         });
         console.log('State set to homepage');
     };
