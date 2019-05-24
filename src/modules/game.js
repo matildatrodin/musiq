@@ -52,7 +52,7 @@ class Game extends Component {
 
     endGame() {
         this.setState({
-            currentQuestion:  this.state.currentQuestion + 1
+            currentQuestion:  this.state.questionArray.length
         })
     }
 
@@ -155,6 +155,7 @@ class Game extends Component {
                     <button onClick={this.handleClick}
                             value={this.state.questionArray[this.state.currentQuestion].option4}>{this.state.questionArray[this.state.currentQuestion].option4}</button>
                     <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
+                    <button onClick={this.endGame}>{this.state.endButton}</button>
                 </div>
             );
         }
