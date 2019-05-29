@@ -30,6 +30,8 @@ class Game extends Component {
 
     }
 
+    /*Creates an array of questions from the question data created in quizGenerator*/
+
     setQuestionArray = () => {
         let questionArray = [];
         var i;
@@ -51,32 +53,42 @@ class Game extends Component {
     };
 
 
+    /*Moves the user to the end of the game*/
+
     endGame() {
         this.setState({
             currentQuestion:  this.state.questionArray.length
         })
     }
 
+    /*Moves the user to the home page*/
+
     returnToMenu(){
         this.props.moveToHomePage();
     }
 
+    /*Plays the current song in the game*/
 
     playSong(songId) {
         this.props.play(songId);
     }
 
+    /*Before the component is rendered, the component will set the question array for the game*/
+
     componentWillMount() {
         this.setQuestionArray();
     }
+
+    /*Once the component has been loaded, it will play the first song in the array of questions*/
 
     componentDidMount() {
         this.playSong(this.state.questionArray[0].songId);
 
     }
 
+    /*Corrects the questions*/
+
     handleClick(choice){
-        console.log(choice.target.value);
         if (choice.target.value === this.state.questionArray[this.state.currentQuestion].option1
             && this.state.currentQuestion === this.state.questionArray[this.state.currentQuestion].questionId){
             this.setState({
@@ -90,6 +102,8 @@ class Game extends Component {
             console.log("wrong")
         }
     };
+
+    /*Moves the user to the next question*/
 
     nextQuestion(){
 
