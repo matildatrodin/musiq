@@ -12,11 +12,8 @@ import default_album from './resources/img/default.png';
 import background_animation from './resources/animations/background.js'
 import {promised} from "q";
 
-
-/*
-TO DO
-Add username and user picture
-*/
+/*TODO: Add tutorial
+* TODO: Get language switch to work*/
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -50,7 +47,6 @@ class App extends Component {
             currentPage: 'homePage',
         };
 
-        this.getNowPlaying = this.getNowPlaying.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
         this.moveToHomePage = this.moveToHomePage.bind(this);
         this.startTutorial = this.startTutorial.bind(this);
@@ -75,6 +71,8 @@ class App extends Component {
         return hashParams;
     }
 
+    /*Gets the user information of the logged in user*/
+
     getUser(){
         spotifyApi.getMe()
             .then((response) =>{
@@ -84,6 +82,8 @@ class App extends Component {
                 });
             })
     }
+
+    /*Moves the user to the homepage*/
 
     moveToHomePage = () => {
         this.setState({
@@ -95,6 +95,8 @@ class App extends Component {
         console.log('State set to homepage');
     };
 
+    /*Renders the tutorial page*/
+
     startTutorial = () => {
         this.setState({
             tutorial: true
@@ -102,6 +104,8 @@ class App extends Component {
         console.log('State set to homepage + tutorial');
 
     };
+
+    /*Sets the chosen playlist and makes it possible for the user to start the quiz*/
 
     startToCreateQuiz = (playlist) => {
         this.setState({
@@ -118,6 +122,8 @@ class App extends Component {
         console.log('State set to createQuizPage');
     };
 
+    /*Send the user to the game page*/
+
     moveToGame = (questionData) => {
         this.setState({
             questionData: questionData,
@@ -126,18 +132,7 @@ class App extends Component {
         console.log('State set to gamePage')
     };
 
-
-    getNowPlaying(){
-        spotifyApi.getMyCurrentPlaybackState()
-            .then((response) => {
-                this.setState({
-                    nowPlaying: {
-                        name: response.item.name,
-                        albumArt: response.item.album.images[0].url
-                }
-            });
-        })
-    }
+    /*Gets the logged in users playlists*/
 
     getPlaylist () {
         spotifyApi.getUserPlaylists()
@@ -156,6 +151,8 @@ class App extends Component {
             });
         return this.state.playlistGrid;
     }
+
+    /*The code for playing the tracks on your spotify client*/
 
     handleLoadSuccess() {
         this.setState({ scriptLoaded: true });
@@ -235,6 +232,11 @@ class App extends Component {
     }
 
 
+    /*When the component App.js is loaded it will:
+    * Get the users playlists
+    * Get the users details
+    * Establish a connection to the users spotify client
+    * */
     componentDidMount() {
         this.getPlaylist();
         this.getUser();
