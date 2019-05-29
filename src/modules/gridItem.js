@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../index.css';
 
+/*This component simply renders your playlists into a grid*/
+
 class GridItem extends Component {
 
     constructor(props){
@@ -12,6 +14,8 @@ class GridItem extends Component {
             startCreateQuiz: this.props.startCreateQuiz
         };
     }
+
+    /*Sends the chosen playlist to parent App.js*/
 
     handleClick = () => { this.props.startToCreateQuiz(this.props.playlist); };
 
