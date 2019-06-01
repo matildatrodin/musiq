@@ -29,12 +29,19 @@ class QuizGenerator extends Component {
 
 
     }
+    /*Renders the game in App.js*/
 
     handleClick = () => { this.props.moveToGame(this.state.questionData); };
+
+    /*Changes the amount of questions after the user input*/
 
     handleChange(event){
         this.setState({amountOfQuestions: event.target.value});
     }
+
+    /*Generates the quiz data when the user has chosen an amount of questions and submitted
+    * Will not generate quiz data if amount of questions are < 1
+    * */
 
     handleSubmit(event){
         event.preventDefault();
@@ -45,10 +52,14 @@ class QuizGenerator extends Component {
         }
     }
 
+    /*Sets the quiz-status to not ready so that the user can change the amount of questions*/
+
     changeAmount(){
         this.setState({quizReady: false})
     }
 
+
+    /*Gets the tracks from the chosen playlist*/
 
     getTracks (chosenPlaylist) {
 
@@ -70,6 +81,8 @@ class QuizGenerator extends Component {
             });
     }
 
+    /*Gets related artists for the quiz answer options*/
+
     getRelatedArtist(artistId){
         let relatedArtists = [];
 
@@ -87,7 +100,7 @@ class QuizGenerator extends Component {
 
 
 
-
+    /*Takes the chosen playlist-tracks and creates data for questions.*/
 
     generateQuizData = () => {
         let questionData = [];
@@ -110,11 +123,17 @@ class QuizGenerator extends Component {
 
     };
 
+    /*When the quizGenerator component has been loaded, it will automatically get the tracks from the
+    * chosen playlist*/
+
     componentDidMount() {
         this.getTracks(this.props.chosenPlaylist);
     };
 
 
+    /*If the user changes playlist, the componend will replace the previous fetched tracks with the tracks
+    * from the new chosen playlist
+    * */
 
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({
