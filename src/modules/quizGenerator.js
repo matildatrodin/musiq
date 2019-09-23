@@ -11,7 +11,7 @@ class QuizGenerator extends Component {
 
         this.state = {
             playlistTracks: [],
-            relatedArtists: "",
+            optionsArray: "",
             questionData: [],
             amountOfQuestions: 0,
             playlistChosen: this.props.playlistChosen,
@@ -24,7 +24,7 @@ class QuizGenerator extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.changeAmount = this.changeAmount.bind(this);
-        this.getRelatedArtist = this.getRelatedArtist.bind(this);
+        this.setOptionsArray = this.setOptionsArray.bind(this);
 
 
 
@@ -72,7 +72,7 @@ class QuizGenerator extends Component {
 
         spotifyApi.getPlaylistTracks(chosenPlaylist.playlistId)
             .then((response) => {
-                var i;
+                let i;
                 for(i =0; i < response.items.length; i++) {
                     this.setState(previous => ({
                         playlistTracks: [...previous.playlistTracks, response.items[i]
@@ -81,21 +81,23 @@ class QuizGenerator extends Component {
             });
     }
 
-    /*Gets related artists for the quiz answer options*/
+    /*Gets related artists for the quiz answer options and sets the optionsArray for the quiz*/
 
-    getRelatedArtist(artistId){
-        let relatedArtists = [];
+    setOptionsArray(artistId, name){
+        let optionsArray = [{
+            "name": name,
+        }];
 
         spotifyApi.getArtistRelatedArtists(artistId)
             .then((response) =>{
-                var i;
-                for (i = 0; i < response.artists.length; i++){
-                    relatedArtists.push({
+                let i;
+                for (i = 0; i < 3; i++){
+                    optionsArray.push({
                         "name" : response.artists[i].name
                     })
                 }
             });
-        return (relatedArtists);
+        return (optionsArray);
     }
 
 
@@ -104,7 +106,7 @@ class QuizGenerator extends Component {
 
     generateQuizData = () => {
         let questionData = [];
-        var i;
+        let i;
         for (i = 0; i < this.state.playlistTracks.length && i < this.state.amountOfQuestions; i++){
 
             questionData.push({
@@ -113,7 +115,7 @@ class QuizGenerator extends Component {
                     "songId": this.state.playlistTracks[i].track.id,
                     "artistId": this.state.playlistTracks[i].track.artists[0].id,
                     "playlistImage": this.state.chosenPlaylist.image,
-                    "relatedArtists": this.getRelatedArtist(this.state.playlistTracks[i].track.artists[0].id)
+                    "options": this.setOptionsArray(this.state.playlistTracks[i].track.artists[0].id, this.state.playlistTracks[i].track.artists[0].name)
             });
         }
         this.setState({
