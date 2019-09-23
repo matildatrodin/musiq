@@ -111,6 +111,7 @@ class App extends Component {
 
     moveToGame = (questionData) => {
         this.setState({
+            questionData: questionData,
             currentPage: 'gamePage',
         });
         console.log('State set to gamePage')
