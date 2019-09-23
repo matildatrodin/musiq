@@ -25,6 +25,7 @@ class QuizGenerator extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.changeAmount = this.changeAmount.bind(this);
         this.setOptionsArray = this.setOptionsArray.bind(this);
+        this.shuffleTracks = this.shuffleTracks.bind(this);
 
 
 
@@ -70,16 +71,27 @@ class QuizGenerator extends Component {
             });
         }
 
+        let tracks =[];
+
         spotifyApi.getPlaylistTracks(chosenPlaylist.playlistId)
             .then((response) => {
                 let i;
                 for(i =0; i < response.items.length; i++) {
-                    this.setState(previous => ({
-                        playlistTracks: [...previous.playlistTracks, response.items[i]
-                        ]}))
+                    tracks.push(response.items[i]
+                    )
                 }
+                this.setState({playlistTracks: this.shuffleTracks(tracks)})
             });
     }
+
+    shuffleTracks(tracks){
+        for ( let i = tracks.length - 1; i > 0; i--){
+            const j = Math.floor(Math.random() * (i+1));
+            [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
+        }
+        return tracks;
+    }
+
 
     /*Gets related artists for the quiz answer options and sets the optionsArray for the quiz*/
 
