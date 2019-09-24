@@ -260,6 +260,10 @@ input:focus {
 	height: 40px;
 }
 
+.game_container {
+	height: 100%;
+}
+
 .question_body {
 	height: 100%;
 	display: flex;

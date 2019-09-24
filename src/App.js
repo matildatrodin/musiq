@@ -10,9 +10,6 @@ import './index.css';
 import spotify_white from './resources/icons/spotify_white.svg';
 import default_album from './resources/img/default.png';
 import background_animation from './resources/animations/background.js'
-import {promised} from "q";
-
-/* TODO: Get language switch to work*/
 
 const spotifyApi = new SpotifyWebApi();
 

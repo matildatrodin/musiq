@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ProgressBar from './progressBar';
 import '../index.css';
 
 
@@ -20,7 +21,8 @@ class Game extends Component {
             wrongTitle: "Wrong answers",
             returnButton: "Return to menu",
             correct: 0,
-            wrong: 0
+            wrong: 0,
+            percentage: 0
 
         };
         this.setQuestionArray = this.setQuestionArray.bind(this);
@@ -72,7 +74,8 @@ class Game extends Component {
             console.log("You need to answer")
         } else {
             this.setState({
-                currentQuestion: this.state.questionArray.length
+                currentQuestion: this.state.questionArray.length,
+                percentage: this.state.percentage + 100/this.state.questionArray.length,
             })
         }
     }
@@ -139,7 +142,8 @@ class Game extends Component {
             this.setState({
                 currentQuestion:  this.state.currentQuestion + 1,
                 chosenAnswer: "",
-                answered: false
+                answered: false,
+                percentage: this.state.percentage + 100/this.state.questionArray.length,
             });
             this.playSong(this.state.questionArray[this.state.currentQuestion + 1].songId);
         }
@@ -153,17 +157,20 @@ class Game extends Component {
         if (this.state.currentQuestion === this.state.questionArray.length)  {
 
             return(
-                <div className="question_body">
+                <div className="game_container">
+                    <ProgressBar percentage={this.state.percentage}/>
+                    <div className="question_body">
 
-                    <div className="result">
-                        <h3>{this.state.correctTitle}: {this.state.correct}</h3>
-                        <h3>{this.state.wrongTitle}: {this.state.wrong}</h3>
+                        <div className="result">
+                            <h3>{this.state.correctTitle}: {this.state.correct}</h3>
+                            <h3>{this.state.wrongTitle}: {this.state.wrong}</h3>
+                        </div>
+
+                        <div className="question_next">
+                            <button onClick={this.returnToMenu}>{this.state.returnButton}</button>
+                        </div>
+
                     </div>
-
-                    <div className="question_next">
-                        <button onClick={this.returnToMenu}>{this.state.returnButton}</button>
-                    </div>
-
                 </div>
             )
 
@@ -171,7 +178,11 @@ class Game extends Component {
         } else if (this.state.currentQuestion === this.state.questionArray.length - 1 && this.state.answered === true) {
 
             return(
-                <div className="question_body">
+                <div className="game_container">
+                    <ProgressBar percentage={this.state.percentage}/>
+
+                    <div className="question_body">
+
                     <div className="question">
                         <img src={this.state.questionArray[0].playlistImage}/>
                         <h1>Who's the artist of this song?</h1>
@@ -180,13 +191,17 @@ class Game extends Component {
                     <div className="question_next">
                         <button onClick={this.endGame}>{this.state.endButton}</button>
                     </div>
+                    </div>
                 </div>
             )
 
         } else if (this.state.currentQuestion === this.state.questionArray.length - 1 && this.state.answered === false){
 
             return(
-                <div className="question_body">
+                <div className="game_container">
+                    <ProgressBar percentage={this.state.percentage}/>
+
+                    <div className="question_body">
 
                     <div className="question">
                         <img src={this.state.questionArray[0].playlistImage}/>
@@ -201,10 +216,10 @@ class Game extends Component {
 
 
                     <div className="question_next">
-                        <p>{this.state.currentQuestion + 1} of {this.state.questionArray.length}</p>
                         <button onClick={this.handleClick}>Submit</button>
                     </div>
 
+                    </div>
                 </div>
             )
         }
@@ -212,7 +227,11 @@ class Game extends Component {
         else if (this.state.currentQuestion !== this.state.questionArray.length && this.state.answered === true) {
 
             return(
-                <div className="question_body">
+                <div className="game_container">
+                    <ProgressBar percentage={this.state.percentage}/>
+
+                    <div className="question_body">
+
                     <div className="question">
                         <img src={this.state.questionArray[0].playlistImage}/>
                         <h1>Who's the artist of this song?</h1>
@@ -221,6 +240,7 @@ class Game extends Component {
                     <div className="question_next">
                         <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
                     </div>
+                    </div>
                 </div>
             )
         }
@@ -228,7 +248,10 @@ class Game extends Component {
         else if (this.state.currentQuestion !== this.state.questionArray.length && this.state.answered === false) {
 
             return (
-                <div className="question_body">
+                <div className="game_container">
+                    <ProgressBar percentage={this.state.percentage}/>
+
+                    <div className="question_body">
 
                     <div className="question">
                         <img src={this.state.questionArray[0].playlistImage}/>
@@ -241,11 +264,11 @@ class Game extends Component {
                     </div>
 
                     <div className="question_next">
-                        <p>{this.state.currentQuestion + 1} of {this.state.questionArray.length}</p>
                         <button onClick={this.handleClick}>Submit</button>
                         <button onClick={this.endGame}>{this.state.endButton}</button>
                     </div>
 
+                    </div>
                 </div>
             );
         }
