@@ -15,7 +15,10 @@ var cookieParser = require('cookie-parser');
 
 var client_id = '437ac5ae84f74c6785fd442307e5c19b'; // Your client id
 var client_secret = '16924aa0c1754029b26457a951f18d18'; // Your secret
-var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+var redirect_uri = process.env.NODE_ENV === 'production'
+    ? 'https://musi-q.herokuapp.com'
+    : 'http://localhost:5000/callback'; // Your redirect uri
+
 
 /**
  * Generates a random string containing numbers and letters
@@ -35,6 +38,7 @@ var generateRandomString = function(length) {
 var stateKey = 'spotify_auth_state';
 
 var app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.static(__dirname + '/public'))
    .use(cors())
@@ -143,5 +147,5 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+console.log('Listening on ' + PORT);
+app.listen(PORT);
