@@ -12,6 +12,7 @@ class Game extends Component {
             questionArray: [],
             optionArray: [],
             currentQuestion: 0,
+            chosenAnswer: "",
             answered: false,
             nextButton: "Next question",
             endButton: "End Game",
@@ -28,6 +29,7 @@ class Game extends Component {
         this.nextQuestion = this.nextQuestion.bind(this);
         this.endGame = this.endGame.bind(this);
         this.returnToMenu = this.returnToMenu.bind(this);
+        this.chosenAnswer = this.chosenAnswer.bind(this);
 
 
     }
@@ -66,9 +68,13 @@ class Game extends Component {
     /*Moves the user to the end of the game*/
 
     endGame() {
-        this.setState({
-            currentQuestion:  this.state.questionArray.length
-        })
+        if(this.state.answered === false) {
+            console.log("You need to answer")
+        } else {
+            this.setState({
+                currentQuestion: this.state.questionArray.length
+            })
+        }
     }
 
     /*Moves the user to the home page*/
@@ -98,11 +104,19 @@ class Game extends Component {
 
     /*Corrects the questions*/
 
-    handleClick(choice){
+    chosenAnswer(choice){
+        this.setState({
+            chosenAnswer: choice.target.value
+        });
+    }
+
+    handleClick(){
         if (this.state.answered === true){
             console.log("You already answered")
-        } else if (choice.target.value === this.state.questionArray[this.state.currentQuestion].artist
-            && this.state.currentQuestion === this.state.questionArray[this.state.currentQuestion].questionId){
+        } else if (this.state.chosenAnswer === ""){
+            console.log("You need to pick an answer")
+        } else if (this.state.chosenAnswer === this.state.questionArray[this.state.currentQuestion].artist
+            && this.state.currentQuestion === this.state.questionArray[this.state.currentQuestion].questionId) {
             this.setState({
                 correct: this.state.correct + 1,
                 answered: true
@@ -124,6 +138,7 @@ class Game extends Component {
         if (this.state.currentQuestion < this.state.questionArray.length){
             this.setState({
                 currentQuestion:  this.state.currentQuestion + 1,
+                chosenAnswer: "",
                 answered: false
             });
             this.playSong(this.state.questionArray[this.state.currentQuestion + 1].songId);
@@ -152,7 +167,23 @@ class Game extends Component {
                 </div>
             )
 
-        } else if (this.state.currentQuestion === this.state.questionArray.length - 1){
+
+        } else if (this.state.currentQuestion === this.state.questionArray.length - 1 && this.state.answered === true) {
+
+            return(
+                <div className="question_body">
+                    <div className="question">
+                        <img src={this.state.questionArray[0].playlistImage}/>
+                        <h1>Who's the artist of this song?</h1>
+                        <h2>{"Correct answer: "}{this.state.questionArray[this.state.currentQuestion].artist}</h2>
+                    </div>
+                    <div className="question_next">
+                        <button onClick={this.endGame}>{this.state.endButton}</button>
+                    </div>
+                </div>
+            )
+
+        } else if (this.state.currentQuestion === this.state.questionArray.length - 1 && this.state.answered === false){
 
             return(
                 <div className="question_body">
@@ -164,22 +195,37 @@ class Game extends Component {
 
                     <div className="answers">
                     {this.state.questionArray[this.state.currentQuestion].options.map(option =>
-                        <button onClick={this.handleClick} className="answerButton" value={option.name}>{option.name}</button>)}
+                        <button onClick={this.chosenAnswer} className="answerButton" value={option.name}>{option.name}</button>)}
                     </div>
 
 
 
                     <div className="question_next">
                         <p>{this.state.currentQuestion + 1} of {this.state.questionArray.length}</p>
-                        <button onClick={this.endGame}>{this.state.endButton}</button>
+                        <button onClick={this.handleClick}>Submit</button>
                     </div>
 
                 </div>
             )
         }
 
+        else if (this.state.currentQuestion !== this.state.questionArray.length && this.state.answered === true) {
 
-        else if (this.state.currentQuestion !== this.state.questionArray.length) {
+            return(
+                <div className="question_body">
+                    <div className="question">
+                        <img src={this.state.questionArray[0].playlistImage}/>
+                        <h1>Who's the artist of this song?</h1>
+                        <h2>{"Correct answer: "}{this.state.questionArray[this.state.currentQuestion].artist}</h2>
+                    </div>
+                    <div className="question_next">
+                        <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
+                    </div>
+                </div>
+            )
+        }
+
+        else if (this.state.currentQuestion !== this.state.questionArray.length && this.state.answered === false) {
 
             return (
                 <div className="question_body">
@@ -191,12 +237,12 @@ class Game extends Component {
 
                     <div className="answers">
                     {this.state.questionArray[this.state.currentQuestion].options.map(option =>
-                            <button onClick={this.handleClick} className="answerButton" value={option.name}>{option.name}</button>)}
+                            <button onClick={this.chosenAnswer} className="answerButton" value={option.name}>{option.name}</button>)}
                     </div>
 
                     <div className="question_next">
                         <p>{this.state.currentQuestion + 1} of {this.state.questionArray.length}</p>
-                        <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
+                        <button onClick={this.handleClick}>Submit</button>
                         <button onClick={this.endGame}>{this.state.endButton}</button>
                     </div>
 
