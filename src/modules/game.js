@@ -187,6 +187,7 @@ class Game extends Component {
                     <div class="question_next">
                         <p>{this.state.currentQuestion + 1} of {this.state.questionArray.length}</p>
                         <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
+                        <button onClick={this.endGame}>{this.state.endButton}</button>
                     </div>
 
                 </div>
