@@ -2,6 +2,10 @@
   "name": "musiq",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "10.10.0",
+    "npm": "6.9.0"
+  },
   "dependencies": {
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
