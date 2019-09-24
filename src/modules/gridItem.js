@@ -27,6 +27,7 @@ class GridItem extends Component {
             <div className="single">
                 <img src={this.state.image} className='playlist' onClick={this.handleClick}/>
                 <p>{this.state.playlist.playlistName}</p>
+                <p>{'Songs in this playlist: '}{this.state.playlist.no_of_songs}</p>
             </div>
 
         );

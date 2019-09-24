@@ -35,7 +35,7 @@ class App extends Component {
             nowPlaying: { name: 'Not Checked', albumArt: '' },
             playlistGrid: [],
 
-            chosenPlaylist: { playlistId: "", image: default_album, playlistName: ""}, 
+            chosenPlaylist: { playlistId: "", image: default_album, playlistName: "", no_of_songs: ""},
             playlistChosen: false,
             playlistTracks: [],
             deviceId: "",
@@ -86,7 +86,7 @@ class App extends Component {
         this.setState({
             currentPage: 'homePage',
             playlistChosen: false,
-            chosenPlaylist: { playlistId: "", image: default_album, playlistName: "" }
+            chosenPlaylist: { playlistId: "", image: default_album, playlistName: "", no_of_songs: "" }
         });
         console.log('State set to homepage');
     };
@@ -100,6 +100,7 @@ class App extends Component {
                 "playlistId": playlist.playlistId,
                 "image": playlist.image,
                 "playlistName": playlist.playlistName},
+                "no_of_songs": playlist.no_of_songs,
             playlistChosen: true
 
             //currentPage: 'createQuizPage'
@@ -129,6 +130,7 @@ class App extends Component {
                             "playlistId": response.items[i].id,
                             "image": response.items[i].images[0].url,
                             "playlistName": response.items[i].name,
+                            "no_of_songs": response.items[i].tracks.total,
                             "tracksId": response.items[i].tracks
                         }]
                     }))
