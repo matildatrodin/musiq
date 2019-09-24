@@ -169,7 +169,7 @@ class QuizGenerator extends Component {
                     <form className="create_step" onSubmit={this.handleSubmit}>
                         <label>Number of Questions</label>
                         <input type="text" name="amountOfQuestions" value={this.state.amountOfQuestions} onChange={this.handleChange}/>
-                        <input class="button buttonCreate" type="submit" value="Submit"/>
+                        <input className="button buttonCreate" type="submit" value="Submit"/>
                     </form>
                 </div>
 
@@ -181,8 +181,8 @@ class QuizGenerator extends Component {
             return (
                 <div className="create_step">
                     <p>Your quiz is ready</p>
-                    <button class="buttonCreate" onClick={this.changeAmount}>Edit</button>
-                    <button class="buttonCreate" onClick={this.handleClick}>Start Quiz</button>
+                    <button className="buttonCreate" onClick={this.changeAmount}>Edit</button>
+                    <button className="buttonCreate" onClick={this.handleClick}>Start Quiz</button>
                 </div>
 
             );

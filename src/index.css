@@ -303,7 +303,7 @@ input:focus {
 	align-items: center;
 }
 
-.answer button {
+.answerButton {
 	background-color: var(--musiq-white);
 	color: var(--musiq-black);
 	font-size: 16px;
@@ -315,8 +315,8 @@ input:focus {
 	align-items: center;
 }
 
-.answer button:focus {
-	background: #DDD;
+.answerButton:focus {
+	background-color: #008395;
 }
 
 .question_next {

@@ -12,6 +12,7 @@ class Game extends Component {
             questionArray: [],
             optionArray: [],
             currentQuestion: 0,
+            answered: false,
             nextButton: "Next question",
             endButton: "End Game",
             correctTitle: "Correct answers",
@@ -98,15 +99,19 @@ class Game extends Component {
     /*Corrects the questions*/
 
     handleClick(choice){
-        if (choice.target.value === this.state.questionArray[this.state.currentQuestion].artist
+        if (this.state.answered === true){
+            console.log("You already answered")
+        } else if (choice.target.value === this.state.questionArray[this.state.currentQuestion].artist
             && this.state.currentQuestion === this.state.questionArray[this.state.currentQuestion].questionId){
             this.setState({
-                correct: this.state.correct + 1
+                correct: this.state.correct + 1,
+                answered: true
             });
             console.log("correct");
         } else {
             this.setState({
-                wrong: this.state.wrong + 1
+                wrong: this.state.wrong + 1,
+                answered: true
             });
             console.log("wrong")
         }
@@ -119,6 +124,7 @@ class Game extends Component {
         if (this.state.currentQuestion < this.state.questionArray.length){
             this.setState({
                 currentQuestion:  this.state.currentQuestion + 1,
+                answered: false
             });
             this.playSong(this.state.questionArray[this.state.currentQuestion + 1].songId);
         }
@@ -139,7 +145,7 @@ class Game extends Component {
                         <h3>{this.state.wrongTitle}: {this.state.wrong}</h3>
                     </div>
 
-                    <div class="question_next">
+                    <div className="question_next">
                         <button onClick={this.returnToMenu}>{this.state.returnButton}</button>
                     </div>
 
@@ -157,10 +163,13 @@ class Game extends Component {
                     </div>
 
                     <div className="answers">
-                        {this.state.questionArray[this.state.currentQuestion].options.map(option => <button onClick={this.handleClick} className="answer" value={option.name}>{option.name}</button>)}
+                    {this.state.questionArray[this.state.currentQuestion].options.map(option =>
+                        <button onClick={this.handleClick} className="answerButton" value={option.name}>{option.name}</button>)}
                     </div>
 
-                    <div class="question_next">
+
+
+                    <div className="question_next">
                         <p>{this.state.currentQuestion + 1} of {this.state.questionArray.length}</p>
                         <button onClick={this.endGame}>{this.state.endButton}</button>
                     </div>
@@ -181,10 +190,11 @@ class Game extends Component {
                     </div>
 
                     <div className="answers">
-                        {this.state.questionArray[this.state.currentQuestion].options.map(option => <button onClick={this.handleClick} className="answer" value={option.name}>{option.name}</button>)}
+                    {this.state.questionArray[this.state.currentQuestion].options.map(option =>
+                            <button onClick={this.handleClick} className="answerButton" value={option.name}>{option.name}</button>)}
                     </div>
 
-                    <div class="question_next">
+                    <div className="question_next">
                         <p>{this.state.currentQuestion + 1} of {this.state.questionArray.length}</p>
                         <button onClick={this.nextQuestion}>{this.state.nextButton}</button>
                         <button onClick={this.endGame}>{this.state.endButton}</button>
