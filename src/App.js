@@ -12,6 +12,7 @@ import default_album from './resources/img/default.png';
 import background_animation from './resources/animations/background.js'
 
 const spotifyApi = new SpotifyWebApi();
+const PORT =  process.env.PORT || 8888;
 
 class App extends Component {
     constructor(props){
@@ -255,7 +256,7 @@ class App extends Component {
                             </div>
 
                             <h1 className="logo">musi<span id="q">Q</span></h1>
-                            <a className="button spotifyButton" href="http://localhost:8888/login"><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
+                            <a className="button spotifyButton" href={PORT}><span>Login with</span><img src={spotify_white} alt="Spotify"/></a>
 
                         </div>
                     </div>
